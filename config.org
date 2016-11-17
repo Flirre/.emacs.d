@@ -15,11 +15,16 @@
    #+end_src
 * Customize settings
   A custom file to keep customizations out of
-  [[file:init.el][initl.el]]. All to declutter my [[file:init.el][init.el]].
+  [[file:init.el][init.el]]. All to declutter my [[file:init.el][init.el]].
   #+begin_src emacs_lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
   #+end_src
+* Initialization
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(column-number-mode 1)
+(show-paren-mode)
 * Themes
 ** Spacemacs-dark
    A nice dark theme that works great during the night.
@@ -65,8 +70,8 @@
   (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
   
-  ;; No tabs pls
-  (setq-default indent-tabs-mode nil) 
+;  ;; No tabs pls
+;  (setq-default indent-tabs-mode nil) 
   
   ;; Delete regions when marked
   (delete-selection-mode t)
@@ -78,7 +83,11 @@
   (setq visible-bell t)
 
   ;; Company-mode everywhere
+  (use-package company
+  :ensure t
+  :config
   (global-company-mode)
+  (diminish 'company-mode))
 
   ;; Please no bars. 
   (tool-bar-mode -1)
@@ -153,7 +162,11 @@ I'mma try and steal this fullscreen magit conf. and see how it feels.
    #+end_src
    Fancy graphical undo-tree.
    #+begin_src emacs-lisp
+   (use-package undo-tree
+   :ensure t
+   :config
    (add-hook 'prog-mode-hook 'undo-tree-mode)
+   (diminish 'undo-tree-mode))
    #+end_src
 ** Python
 ** Emacs-Lisp
