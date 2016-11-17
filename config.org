@@ -53,7 +53,7 @@
   [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
   You can install it on Arch-Linux using packer, which would look like this:
 
-  #+begin_src bash
+  #+begin_src sh
   packer -S ttf-inconsolata
   #+end_src
   And to tell Emacs to use that font you add:
@@ -168,7 +168,40 @@ I'mma try and steal this fullscreen magit conf. and see how it feels.
    (add-hook 'prog-mode-hook 'undo-tree-mode)
    (diminish 'undo-tree-mode))
    #+end_src
+   Rainbow delimiters in all languages!
+   #+begin_src emacs-lisp
+   (use-package rainbow-delimiters
+   :ensure t
+   :config
+   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+   #+end_src
 ** Python
+   Some Python packages needed for a working Elpy env. should be
+   installed before elpy is installed and configured.
+   #+begin_src sh
+   # Either of these
+   pip install rope
+   pip install jedi
+   # flake8 for code checks
+   pip install flake8
+   # importmagic for automatic imports
+   pip install importmagic
+   # and autopep8 for automatic PEP8 formatting
+   pip install autopep8
+   # and yapf for code formatting
+   pip install yapf
+   #+end_src
+   Or you could the the whole install with a oneliner
+   #+begin_src sh
+   pip install jedi flake8 importmagic autopep8
+   #+end_src
+   Enables Elpy, a nice Python environment.
+   #+begin_src emacs-lisp
+   (use-package elpy
+   :ensure t
+   :config
+    (elpy-enable))
+   #+end_src
 ** Emacs-Lisp
 * PDF-tools
 A package that provides with high-res rendering of pdfs with low waiting time.
