@@ -43,3 +43,14 @@ flycheck_*.el
 
 # directory configuration
 .dir-locals.el
+
+/config.el
+
+# and many more
+/bookmarks
+/backups/
+/auto-save-list/
+/projectile-bookmarks.eld
+/recentf
+/helm-doc.org
+/url/
