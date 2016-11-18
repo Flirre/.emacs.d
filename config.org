@@ -21,10 +21,10 @@
   (load custom-file)
   #+end_src
 * Initialization
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(column-number-mode 1)
-(show-paren-mode)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (column-number-mode 1)
+  (show-paren-mode)
 * Themes
 ** Spacemacs-dark
    A nice dark theme that works great during the night.
