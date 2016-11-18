@@ -202,7 +202,6 @@ I'mma try and steal this fullscreen magit conf. and see how it feels.
    :config
     (elpy-enable))
    #+end_src
-** Emacs-Lisp
 * PDF-tools
 A package that provides with high-res rendering of pdfs with low waiting time.
 #+begin_src emacs-lisp
