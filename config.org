@@ -214,3 +214,12 @@ A package that provides with high-res rendering of pdfs with low waiting time.
   (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
   (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view"))))
 #+end_src
+* Spotify Bindings
+  #+begin_src emacs-lisp
+  (use-package spotify
+  :ensure t
+  :bind (("M-s M-n" . spotify-next)
+         ("M-s M-p" . spotify-previous)
+         ("M-p" . spotify-pause)
+	 ("M-ö" . spotify-play)))
+  #+end_src
