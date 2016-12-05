@@ -221,5 +221,6 @@ A package that provides with high-res rendering of pdfs with low waiting time.
   :bind (("M-s M-n" . spotify-next)
          ("M-s M-p" . spotify-previous)
          ("M-p" . spotify-pause)
-	 ("M-ö" . spotify-play)))
+	 ("M-ö" . spotify-play)
+	 ("<XF86AudioPlay>" . spotify-play)))
   #+end_src
