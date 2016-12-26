@@ -21,13 +21,12 @@
   (load custom-file)
   #+end_src
 * Initialization
-  Removes unnecessary noise and maximizes Emacs on startup.
+  Removes unnecessary noise.
   #+begin_src emacs-lisp
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (column-number-mode 1)
   (show-paren-mode)
-  (toggle-frame-fullscreen)
   #+end_src
 * Themes
 ** Spacemacs-dark
