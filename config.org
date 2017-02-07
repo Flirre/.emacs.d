@@ -209,6 +209,12 @@
    :config
     (elpy-enable))
    #+end_src
+* Web Development
+  Impatient mode, showing changes made to your page, immediately.
+  #+begin_src emacs-lisp
+  (use-package impatient-mode
+  :ensure t)
+  #+end_src
 * PDF-tools
 A package that provides with high-res rendering of pdfs with low waiting time.
 #+begin_src emacs-lisp
