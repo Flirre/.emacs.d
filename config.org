@@ -117,7 +117,7 @@
   Binding helms recentf to have recent files more easily accessible.
   #+begin_src emacs-lisp
   (use-package recentf
-   :bind ("C-x C-r" . helm-recentf)
+   :bind ("C-c C-r" . helm-recentf)
    :config
    (recentf-mode t)
    (setq recentf-max-saved-items 25))
