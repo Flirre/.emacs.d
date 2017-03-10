@@ -129,13 +129,8 @@
   (use-package helm
   :ensure t
   :bind
-   (("M-x" . helm-M-x)
-   ("C-x b" . helm-buffers-list)
-   ("C-x C-f" . helm-find-files))
-   :config
-   (helm-mode 1)
-   (diminish 'helm-mode))
-  #+end_src
+   (("M-x" . helm-M-x)))
+   #+end_src
 * Magit
   Magit is a great interface for git. Much smoother than using command
   line git.
