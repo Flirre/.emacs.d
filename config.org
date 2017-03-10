@@ -205,6 +205,12 @@
     (elpy-enable))
    #+end_src
 * Web Development
+  Simple-httpd, needed for impatient-mode.
+  #+begin_src emacs-lisp
+  (use-package simple-httpd
+  :ensure t)
+  #+end_src
+
   Impatient mode, showing changes made to your page, immediately.
   #+begin_src emacs-lisp
   (use-package impatient-mode
