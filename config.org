@@ -87,6 +87,12 @@
   ;; Please no bars. 
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
+
+  ;; Where am I on the line?
+  (column-number-mode 1)
+
+  ;; Show matching parentheses
+  (show-paren-mode)
   #+end_src
 * Buffers
   Use ibuffer instead of list-buffers
