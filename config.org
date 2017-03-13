@@ -20,14 +20,6 @@
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
   #+end_src
-* Initialization
-  Removes unnecessary noise.
-  #+begin_src emacs-lisp
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (column-number-mode 1)
-  (show-paren-mode)
-  #+end_src
 * Themes
 ** Spacemacs-dark
    A nice dark theme that works great during the night.
@@ -158,9 +150,10 @@
 #+end_src
 * Programming
 ** General
-   A package providing line numbering.
+   Line numbering och spellchecking in programming comments.
    #+begin_src emacs-lisp
    (add-hook 'prog-mode-hook 'linum-mode)
+   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
    #+end_src
    Fancy graphical undo-tree.
    #+begin_src emacs-lisp
@@ -177,6 +170,12 @@
    :config
    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+end_src
+
+   Comment/uncomment regions of code.
+   #+begin_src emacs-lisp
+   (global-set-key (kbd "C-x c") 'comment-or-uncomment-region)
+   #+end_src
+
 ** Python
    Some Python packages needed for a working Elpy env. should be
    installed before elpy is installed and configured.
