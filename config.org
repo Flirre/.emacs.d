@@ -94,6 +94,12 @@
   ;; Show matching parentheses
   (show-paren-mode)
   #+end_src
+* Keybindings
+  This is where I'll keep my different keybindings for all kinds of
+  things.
+  #+begin_src emacs-lisp
+  (global-set-key (kbd "C-s-n") 'make-frame-command)
+  #+end_src
 * Buffers
   Use ibuffer instead of list-buffers
   #+begin_src emacs-lisp
