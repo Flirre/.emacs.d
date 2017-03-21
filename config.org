@@ -123,12 +123,23 @@
 * Org-mode
   *crickets*
 * Helm
+  helm-M-x is a beautiful thing that always helps me find what command
+  I need.
   #+begin_src emacs-lisp
   (use-package helm
   :ensure t
   :bind
    (("M-x" . helm-M-x)))
    #+end_src
+* Ido
+  Looking for things using Ido is a more efficient way of looking
+  while still keeping that "Emacs-way" of life.
+  #+begin_src emacs-lisp
+  (use-package ido
+  :ensure t
+  :config
+  (ido-mode))
+  #+end_src
 * Magit
   Magit is a great interface for git. Much smoother than using command
   line git.
