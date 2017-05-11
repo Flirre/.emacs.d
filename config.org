@@ -247,6 +247,7 @@ A package that provides with high-res rendering of pdfs with low waiting time.
   (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view"))))
 #+end_src
 * Spotify Bindings
+  Keybindings so that I can control Spotify without switching focus from Emacs.
   #+begin_src emacs-lisp
   (use-package spotify
   :ensure t
@@ -254,6 +255,7 @@ A package that provides with high-res rendering of pdfs with low waiting time.
          ("M-s M-p" . spotify-previous)
          ("M-p" . spotify-pause)
 	 ("M-ö" . spotify-play)
+	 ("M-s M-c" . spotify-current)
 	 ("<XF86AudioPlay>" . spotify-play)))
   #+end_src
 * TRAMP/Sudo
