@@ -98,7 +98,7 @@
   This is where I'll keep my different keybindings for all kinds of
   things.
   #+begin_src emacs-lisp
-  (global-set-key (kbd "C-s-n") 'make-frame-command)
+  (global-set-key (kbd "M-n w") 'make-frame-command)
   #+end_src
 * Buffers
   Use ibuffer instead of list-buffers
