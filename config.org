@@ -52,9 +52,9 @@
   packer -S ttf-inconsolata
   #+end_src
   And to tell Emacs to use that font you add:
-  #+begin_src emacs_lisp
+  #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist
-  '(font . "Inconsolata"))
+  '(font . "Inconsolata-12"))
   #+end_src
 * Sane defaults
   #+begin_src emacs-lisp
