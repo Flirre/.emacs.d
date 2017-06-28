@@ -54,7 +54,7 @@
   And to tell Emacs to use that font you add:
   #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist
-  '(font . "Inconsolata-12"))
+  '(font . "Inconsolata-14"))
   #+end_src
 * Sane defaults
   #+begin_src emacs-lisp
@@ -105,11 +105,13 @@
   #+begin_src emacs-lisp
   (defalias 'list-buffers 'ibuffer)
   #+end_src
+  
   Refresh dired in the background as well, BUT DON'T TELL ME!
   #+begin_src emacs-lisp
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
   #+end_src
+  
   Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
   #+begin_src emacs-lisp
   (use-package swap-buffers
@@ -177,14 +179,7 @@
    #+begin_src emacs-lisp
    (add-hook 'prog-mode-hook 'linum-mode)
    #+end_src
-   Fancy graphical undo-tree.
-   #+begin_src emacs-lisp
-   (use-package undo-tree
-   :ensure t
-   :config
-   (add-hook 'prog-mode-hook 'undo-tree-mode)
-   (diminish 'undo-tree-mode))
-   #+end_src
+ 
    Rainbow delimiters in all languages!
    #+begin_src emacs-lisp
    (use-package rainbow-delimiters
