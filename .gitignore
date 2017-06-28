@@ -50,6 +50,9 @@ private.el
 # elisp config
 /config.el
 
+# customizations
+custom.el
+
 # and many more
 /bookmarks
 /backups/
