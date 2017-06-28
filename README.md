@@ -1,1 +1,0 @@
-Read config.org to see what, and why I have installed.
