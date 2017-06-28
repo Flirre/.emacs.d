@@ -159,20 +159,7 @@
   :config
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
   #+end_src
-  I'mma try and steal this fullscreen magit conf. and see how it feels.
-  #+begin_src emacs-lisp
-  ;; full screen magit-status
-  (defadvice magit-status (around magit-fullscreen activate)
-    (window-configuration-to-register :magit-fullscreen)
-    ad-do-it
-    (delete-other-windows))
 
-  (defun magit-quit-session ()
-  "Restores the previous window configuration and kills the magit buffer"
-  (interactive)
-  (kill-buffer)
-  (jump-to-register :magit-fullscreen))
-#+end_src
 * Programming
 ** General
    Line numbering.
