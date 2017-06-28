@@ -44,6 +44,10 @@ flycheck_*.el
 # directory configuration
 .dir-locals.el
 
+# private info
+private.el
+
+# elisp config
 /config.el
 
 # and many more
@@ -54,3 +58,4 @@ flycheck_*.el
 /recentf
 /helm-doc.org
 /url/
+/magithub/

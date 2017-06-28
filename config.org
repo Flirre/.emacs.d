@@ -1,18 +1,6 @@
 #+TITLE: Emacs Config
 #+Author: Filip Lindahl
 
-* Personal Info
-** Contact Information
-   #+begin_src emacs-lisp
-   (setq user-full-name "Filip Lindahl"
-    user-email-address "gysztaf@gmail.com")
-   #+end_src
-** Location
-   #+begin_src emacs-lisp
-   (setq calendar-location-name "Gothenburg, SE")
-   (setq calendar-latitude 57.70887000)
-   (setq calendar-longitude 11.97456000)
-   #+end_src
 * Customize settings
   A custom file to keep customizations out of
   [[file:init.el][init.el]]. All to declutter my [[file:init.el][init.el]].
