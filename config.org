@@ -29,6 +29,7 @@
    #+begin_src emacs-lisp
    (use-package theme-changer
     :ensure t
+    :defer 0
     :config
     (change-theme 'solarized-dark 'spacemacs-dark))
    #+end_src
