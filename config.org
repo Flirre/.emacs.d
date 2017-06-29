@@ -149,6 +149,13 @@
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
   #+end_src
 
+  MagitHub
+  #+begin_src emacs-lisp
+  (use-package magithub
+  :after magit
+  :config (magithub-feature-autoinject t))
+  #+end_src
+
 * Programming
 ** General
    Line numbering.
