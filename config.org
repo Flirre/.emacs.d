@@ -9,29 +9,14 @@
   (load custom-file)
   #+end_src
 * Themes
-** Spacemacs-dark
-   A nice dark theme that works great during the night.
-   #+begin_src emacs-lisp
-   (use-package spacemacs-common
-    :ensure spacemacs-theme
-    :defer t)
-   #+end_src
 ** Solarized-dark
    Another dark theme that is slightly less dark than the previous
    theme and therefore works better during the day.
    #+begin_src emacs-lisp
    (use-package solarized-theme
-    :ensure t)
-   #+end_src
-** Theme-changer
-   A package that switches themes depending on whether the sun is out
-   in your location(that was set-up earlier in my config file.
-   #+begin_src emacs-lisp
-   (use-package theme-changer
     :ensure t
-    :defer 0
     :config
-    (change-theme 'solarized-dark 'spacemacs-dark))
+    (load-theme 'solarized-dark t))
    #+end_src
 * Font
   [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
