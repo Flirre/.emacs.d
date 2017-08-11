@@ -200,14 +200,6 @@
   (use-package impatient-mode
   :ensure t)
   #+end_src
-* PDF-tools
-A package that provides with high-res rendering of pdfs with low waiting time.
-#+begin_src emacs-lisp
-(when (eq system-type 'gnu/linux) 
-  (pdf-tools-install) ; PDF viewer (needs this separate installation)
-  (setq TeX-view-program-selection '((output-pdf "pdf-tools")))
-  (setq TeX-view-program-list '(("pdf-tools" "TeX-pdf-tools-sync-view"))))
-#+end_src
 * Spotify Bindings
   Keybindings so that I can control Spotify without switching focus from Emacs.
   #+begin_src emacs-lisp
