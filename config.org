@@ -247,7 +247,9 @@
   js2-mode for Js
   #+begin_src emacs-lisp
   (use-package js2-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode)))
   #+end_src
 
   Tern and using tern as a company backend.
