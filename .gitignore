@@ -62,3 +62,6 @@ custom.el
 /helm-doc.org
 /url/
 /magithub/
+session.*
+ido.*
+init.el
