@@ -202,16 +202,22 @@
     (elpy-enable))
    #+end_src
 * Web Development
+** Server
   Simple-httpd, needed for impatient-mode.
   #+begin_src emacs-lisp
   (use-package simple-httpd
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'web-mode-hook 'httpd-start))
   #+end_src
 
-  Impatient mode, showing changes made to your page, immediately.
+  Impatient mode, showing changes made to your page immediately.
+  Access at localhost:8080/imp
   #+begin_src emacs-lisp
   (use-package impatient-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'web-mode-hook 'impatient-mode))
   #+end_src
 * Spotify Bindings
   Keybindings so that I can control Spotify without switching focus from Emacs.
