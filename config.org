@@ -8,6 +8,11 @@
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
   #+end_src
+
+  Loading contents from a file containing all of my life ruining secrets.
+  #+begin_src emacs-lisp
+  (if (file-exists-p "private.el") (load-file (concat user-emacs-directory "private.el")))
+  #+end_src
 * Themes
 ** Solarized-dark
    Another dark theme that is slightly less dark than the previous

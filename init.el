@@ -27,8 +27,5 @@
 
 (org-babel-load-file (concat user-emacs-directory "config.org"))
 
-;; Sets a couple of variables with private information.
-(load-file (concat user-emacs-directory "private.el"))
-
 ;; Less garbage
 (setq gc-cons-threshold 800000)
