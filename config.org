@@ -219,6 +219,21 @@
   :config
   (add-hook 'web-mode-hook 'impatient-mode))
   #+end_src
+** HTML
+  #+begin_src emacs-lisp
+  (use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+  (use-package web-beautify
+  :ensure t
+  :after web-mode
+  :config
+  (add-hook 'web-mode-hook
+             (lambda ()
+               (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
+  #+end_src
 * Spotify Bindings
   Keybindings so that I can control Spotify without switching focus from Emacs.
   #+begin_src emacs-lisp
