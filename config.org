@@ -43,10 +43,7 @@
   ;; Put all backup in one place
   (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-  
-;  ;; No tabs pls
-;  (setq-default indent-tabs-mode nil) 
-  
+
   ;; Delete regions when marked
   (delete-selection-mode t)
 
@@ -63,7 +60,7 @@
   (global-company-mode)
   (diminish 'company-mode))
 
-  ;; Please no bars. 
+  ;; Please no bars.
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 
@@ -97,13 +94,13 @@
   #+begin_src emacs-lisp
   (defalias 'list-buffers 'ibuffer)
   #+end_src
-  
+
   Refresh dired in the background as well, BUT DON'T TELL ME!
   #+begin_src emacs-lisp
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
   #+end_src
-  
+
   Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
   #+begin_src emacs-lisp
   (use-package swap-buffers
@@ -165,7 +162,7 @@
    #+begin_src emacs-lisp
    (add-hook 'prog-mode-hook 'linum-mode)
    #+end_src
- 
+
    Rainbow delimiters in all languages!
    #+begin_src emacs-lisp
    (use-package rainbow-delimiters
