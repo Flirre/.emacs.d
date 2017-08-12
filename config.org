@@ -239,6 +239,29 @@
              (lambda ()
                (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
   #+end_src
+
+** CSS
+** JavaScript
+  js2-mode for Js
+  #+begin_src emacs-lisp
+  (use-package js2-mode
+  :ensure t)
+  #+end_src
+
+  Tern and using tern as a company backend.
+  #+begin_src emacs-lisp
+  (use-package tern
+  :ensure t
+  :after js2-mode
+  :config
+  (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
+
+  (use-package company-tern
+  :ensure t
+  :after tern
+  :config
+  (add-to-list 'company-backends 'company-tern))
+  #+end_src
 * Spotify Bindings
   Keybindings so that I can control Spotify without switching focus from Emacs.
   #+begin_src emacs-lisp
