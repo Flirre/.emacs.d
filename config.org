@@ -149,12 +149,15 @@
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
   #+end_src
 
-  MagitHub
-  #+begin_src emacs-lisp
-  (use-package magithub
-  :after magit
-  :config (magithub-feature-autoinject t))
-  #+end_src
+  Not using it right now, but will leave it here for people that might be interested.
+  # MagitHub
+  # #+begin_src emacs-lisp
+  # (use-package magithub
+  # :ensure t
+  # :defer t
+  # :after magit
+  # :config (magithub-feature-autoinject t))
+  # #+end_src
 
 * Programming
 ** General
