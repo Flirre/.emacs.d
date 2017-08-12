@@ -169,6 +169,11 @@
    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
    #+end_src
 
+   Remove trailing whitespace when saving files.
+   #+begin_src emacs-lisp
+   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+   #+end_src
+
    Comment/uncomment regions of code.
    #+begin_src emacs-lisp
    (global-set-key (kbd "C-x c") 'comment-or-uncomment-region)
