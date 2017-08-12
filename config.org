@@ -69,6 +69,19 @@
   (show-paren-mode)
   #+end_src
 * Keybindings
+  Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
+  Great if you don't want to memorize thousands of combinations of keys.
+  #+begin_src emacs-lisp
+  (use-package guide-key
+  :ensure t
+  :diminish guide-key-mode
+  :config
+  (setq guide-key/guide-key-sequence t
+	     guide-key/popup-window-position 'bottom
+	     guide-key/highlight-command-regexp ".*")
+  (guide-key-mode t))
+  #+end_src
+
   This is where I'll keep my different keybindings for all kinds of
   things.
   #+begin_src emacs-lisp
