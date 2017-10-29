@@ -211,6 +211,32 @@
    :config
     (add-hook 'python-mode-hook 'elpy-enable))
    #+end_src
+** C++
+
+Parse header files with C++ parsing.
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+Use the package function-args to get access to 'moo-jump-local' and similar.
+Great for navigating code.
+#+begin_src emacs-lisp
+(use-package function-args
+ :ensure t
+ :config
+(fa-config-default))
+#+end_src
+
+GTAGS together with helm for faster navigation.
+#+begin_src emacs-lisp
+(use-package helm-gtags
+ :ensure t
+ :config
+    (add-hook 'c-mode-hook 'helm-gtags-mode)
+    (add-hook 'c++-mode-hook 'helm-gtags-mode)
+    (add-hook 'asm-mode-hook 'helm-gtags-mode))
+
+#+end_src
+
 * Web Development
 ** Server
   Simple-httpd, needed for impatient-mode.
