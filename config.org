@@ -216,6 +216,7 @@
 Parse header files with C++ parsing.
 #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+#+end_src
 
 Use the package function-args to get access to 'moo-jump-local' and similar.
 Great for navigating code.
