@@ -218,24 +218,32 @@ Parse header files with C++ parsing.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 #+end_src
 
-Use the package function-args to get access to 'moo-jump-local' and similar.
-Great for navigating code.
+Irony mode
 #+begin_src emacs-lisp
-(use-package function-args
- :ensure t
- :config
-(fa-config-default))
+(use-package irony
+:ensure t
+  :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 #+end_src
 
-GTAGS together with helm for faster navigation.
+Company for irony mode
 #+begin_src emacs-lisp
-(use-package helm-gtags
- :ensure t
- :config
-    (add-hook 'c-mode-hook 'helm-gtags-mode)
-    (add-hook 'c++-mode-hook 'helm-gtags-mode)
-    (add-hook 'asm-mode-hook 'helm-gtags-mode))
+(use-package company-irony
+  :ensure t
+  :config
+    (add-to-list 'company-backends 'company-irony))
+#+end_src
 
+Flycheck for irony
+#+begin_src emacs-lisp
+(use-package flycheck-irony
+  :after flycheck
+  :ensure t
+  :config
+    (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 #+end_src
 
 * Web Development
