@@ -245,6 +245,26 @@ Flycheck for irony
   :config
     (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 #+end_src
+*** GLSL
+OpenGL Shader Language.
+
+#+begin_src emacs-lisp
+(use-package glsl-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+  (add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode)))
+#+end_src
+
+Company-glsl requires glslangValidator which can be found [[https://github.com/KhronosGroup/glslang][here]].
+#+begin_src emacs-lisp
+(use-package company-glsl
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-glsl))
+#+end_src
 
 * Web Development
 ** Server
