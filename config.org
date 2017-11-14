@@ -118,7 +118,16 @@
    (setq recentf-max-saved-items 25))
   #+end_src
 * Org-mode
-  *crickets*
+  Visual lines in org mode for better readability.
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'visual-line-mode)
+  #+end_src
+
+  Indent those headers for me please.
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  #+end_src
+
 * Helm
   helm-M-x is a beautiful thing that always helps me find what command
   I need.
