@@ -193,6 +193,17 @@
    (global-set-key (kbd "C-x c") 'comment-or-uncomment-region)
    #+end_src
 
+   Multimarkers!
+   #+begin_src emacs-lisp
+   (use-package multiple-cursors
+   :ensure t
+   :bind
+   (("C-s-c C-s-c" . mc/edit-lines)
+   ("C-s->" . mc/mark-next-like-this)
+   ("C-s-<" . mc/mark-previous-like-this)
+   ("C-s-h" . mc/mark-all-like-this)))
+   #+end_src
+
 ** Python
    Some Python packages needed for a working Elpy env. should be
    installed before elpy is installed and configured.
