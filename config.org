@@ -396,10 +396,3 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 
 (global-set-key [(control x) (control r)] 'find-file-root)
   #+end_src
-* PDF
-#+begin_src emacs-lisp
-(use-package pdf-tools
-  :ensure t
-  :config
-(pdf-tools-install))
-#+end_src
