@@ -13,6 +13,12 @@
   #+begin_src emacs-lisp
   (if (file-exists-p "private.el") (load-file (concat user-emacs-directory "private.el")))
   #+end_src
+
+  Diminish mode, for less clutter.
+  #+begin_src emacs-lisp
+  (use-package diminish
+  :ensure t)
+  #+end_src
 * Themes
 ** Solarized-dark
    Another dark theme that is slightly less dark than the previous
