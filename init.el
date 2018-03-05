@@ -23,7 +23,9 @@
 (require 'bind-key)
 
 ;; Start emacs-server
-(server-start)
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 (org-babel-load-file (concat user-emacs-directory "config.org"))
 
