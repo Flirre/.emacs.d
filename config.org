@@ -348,6 +348,21 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :config
   (add-to-list 'company-backends 'company-tern))
   #+end_src
+* LaTeX
+#+begin_src emacs-lisp
+(use-package auctex
+:defer t
+:ensure t
+:config
+((setq TeX-auto-save t)
+ (setq TeX-parse-self t)
+ (setq-default TeX-master nil))
+ (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+ (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+ (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+ (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+ (setq reftex-plug-into-AUCTeX t))
+#+end_src
 * Spotify Bindings
   Keybindings so that I can control Spotify without switching focus from Emacs.
   #+begin_src emacs-lisp
