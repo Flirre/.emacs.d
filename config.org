@@ -289,14 +289,6 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 
 * Web Development
 ** Server
-  Simple-httpd, needed for impatient-mode.
-  #+begin_src emacs-lisp
-  (use-package simple-httpd
-  :ensure t
-  :config
-  (add-hook 'web-mode-hook 'httpd-start))
-  #+end_src
-
   Impatient mode, showing changes made to your page immediately.
   Access at localhost:8080/imp
   #+begin_src emacs-lisp
@@ -305,6 +297,17 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :config
   (add-hook 'web-mode-hook 'impatient-mode))
   #+end_src
+
+  Simple-httpd, needed for impatient-mode.
+  Also starts browser on page.
+  #+begin_src emacs-lisp
+  (use-package simple-httpd
+  :ensure t
+  :config
+  (add-hook 'web-mode-hook 'httpd-start)
+  (add-hook 'httpd-start-hook (lambda() (browse-url "http://localhost:8080/imp/"))))
+  #+end_src
+
 ** HTML
   #+begin_src emacs-lisp
   (use-package web-mode
