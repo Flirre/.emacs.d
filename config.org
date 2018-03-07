@@ -71,6 +71,11 @@
   ;; Show matching parentheses
   (show-paren-mode)
   #+end_src
+
+  This is good for performance. Apparently.
+  #+begin_src emacs-lisp
+  (setq auto-window-vscroll nil)
+  #+end_src
 * Keybindings
   Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
   Great if you don't want to memorize thousands of combinations of keys.
