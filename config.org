@@ -297,7 +297,14 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :config
   (add-to-list 'company-backends 'company-glsl))
 #+end_src
-
+** Erlang
+EDTS - Erlang Development Tool Suite
+#+begin_src emacs-lisp
+(use-package edts
+:ensure t
+:init
+(require 'edts-start))
+#+end_src
 * Web Development
 ** Server
   Impatient mode, showing changes made to your page immediately.
