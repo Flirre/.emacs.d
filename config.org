@@ -20,11 +20,9 @@
   :ensure t)
   #+end_src
 * Themes
-** Solarized-dark
-   Another dark theme that is slightly less dark than the previous
-   theme and therefore works better during the day.
+** Adwaita
+Lighter theme for lighter days.
    #+begin_src emacs-lisp
-
   (load-theme 'adwaita t)
    #+end_src
 * Font
@@ -295,7 +293,6 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :config
   (add-to-list 'company-backends 'company-glsl))
 #+end_src
-
 ** C#
 #+begin_src emacs-lisp
 (use-package csharp-mode
@@ -308,6 +305,14 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 (add-hook 'csharp-mode-hook 'omnisharp-mode)
 (add-hook 'csharp-mode-hook #'flycheck-mode)
 (add-to-list 'company-backends 'company-omnisharp))
+#+end_src
+** Erlang
+EDTS - Erlang Development Tool Suite
+#+begin_src emacs-lisp
+(use-package edts
+:ensure t
+:init
+(require 'edts-start))
 #+end_src
 * Web Development
 ** Server
@@ -324,10 +329,7 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   Also starts browser on page.
   #+begin_src emacs-lisp
   (use-package simple-httpd
-  :ensure t
-  :config
-  (add-hook 'web-mode-hook 'httpd-start)
-  (add-hook 'httpd-start-hook (lambda() (browse-url "http://localhost:8080/imp/"))))
+  :ensure t)
   #+end_src
 
 ** HTML
@@ -336,14 +338,6 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-
-  (use-package web-beautify
-  :ensure t
-  :after web-mode
-  :config
-  (add-hook 'web-mode-hook
-             (lambda ()
-               (add-hook 'before-save-hook 'web-beautify-html-buffer t t))))
   #+end_src
 
 ** CSS
@@ -370,6 +364,39 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   :config
   (add-to-list 'company-backends 'company-tern))
   #+end_src
+** TypeScript
+TIDE - TypeScript Interactive Development Environment
+
+#+begin_src emacs-lisp
+(use-package tide
+:ensure t
+:config
+(setq company-tooltip-align-annotations t)
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun setup-tide-mode ()
+(interactive)
+(tide-setup)
+(flycheck-mode +1)
+(setq flycheck-check-syntax-automatically '(save-mode-enabled))
+(eldoc-mode +1)
+(tide-hl-identifier-mode +1)
+(company-mode +1))
+#+end_src
+
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
+#+end_src
+
 * LaTeX
 #+begin_src emacs-lisp
 (use-package auctex
