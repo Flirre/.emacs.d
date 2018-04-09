@@ -298,6 +298,19 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   (add-to-list 'company-backends 'company-glsl))
 #+end_src
 
+** C#
+#+begin_src emacs-lisp
+(use-package csharp-mode
+:ensure t
+)
+
+(use-package omnisharp
+:ensure t
+:config
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(add-hook 'csharp-mode-hook #'flycheck-mode)
+(add-to-list 'company-backends 'company-omnisharp))
+#+end_src
 * Web Development
 ** Server
   Impatient mode, showing changes made to your page immediately.
