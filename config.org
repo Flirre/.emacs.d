@@ -24,10 +24,8 @@
    Another dark theme that is slightly less dark than the previous
    theme and therefore works better during the day.
    #+begin_src emacs-lisp
-   (use-package solarized-theme
-    :ensure t
-    :config
-    (load-theme 'solarized-dark t))
+
+  (load-theme 'adwaita t)
    #+end_src
 * Font
   [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
