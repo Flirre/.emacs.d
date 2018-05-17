@@ -64,4 +64,9 @@ custom.el
 /magithub/
 session.*
 ido.*
-init.el
+/edts/
+/irony/
+/meghanada/
+ac-comphist.dat
+.mc-lists.el
+/.cache/
