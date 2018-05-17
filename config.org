@@ -350,20 +350,17 @@ EDTS - Erlang Development Tool Suite
   (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode)))
   #+end_src
 
-  Tern and using tern as a company backend.
-  #+begin_src emacs-lisp
-  (use-package tern
-  :ensure t
-  :after js2-mode
-  :config
-  (add-hook 'js2-mode-hook (lambda () (tern-mode t))))
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "jsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+;;(flycheck-add-mode 'typescript-tslint 'web-mode)
+#+end_src
 
-  (use-package company-tern
-  :ensure t
-  :after tern
-  :config
-  (add-to-list 'company-backends 'company-tern))
-  #+end_src
+
 ** TypeScript
 TIDE - TypeScript Interactive Development Environment
 
