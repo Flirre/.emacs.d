@@ -334,6 +334,21 @@ EDTS - Erlang Development Tool Suite
 :init
 (require 'edts-start))
 #+end_src
+** Java
+#+begin_src emacs-lisp
+(use-package meghanada
+:ensure t
+:bind
+(:map meghanada-mode-map
+(("C-M-o" . meghanada-optimize-import)
+("C-M-t" . meghanada-import-all)))
+:config
+(add-hook 'java-mode-hook 'tkj-java-meghanda-mode-hook))
+
+(defun tkj-java-meghanda-mode-hook ()
+(meghanada-mode)
+(flycheck-mode))
+#+end_src
 * Web Development
 ** Server
   Impatient mode, showing changes made to your page immediately.
