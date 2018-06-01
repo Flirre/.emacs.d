@@ -37,7 +37,7 @@ Lighter theme for lighter days.
   (add-to-list 'default-frame-alist
   '(font . "Inconsolata-14"))
   #+end_src
-* Sane defaults
+* Sane defaults / customizations
   #+begin_src emacs-lisp
   ;; Less prompting
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -187,7 +187,7 @@ Lighter theme for lighter days.
 ** General
    Line numbering.
    #+begin_src emacs-lisp
-   (add-hook 'prog-mode-hook 'linum-mode)
+   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
    #+end_src
 
    Rainbow delimiters in all languages!
@@ -402,7 +402,6 @@ EDTS - Erlang Development Tool Suite
 ;;(flycheck-add-mode 'typescript-tslint 'web-mode)
 #+end_src
 
-
 ** TypeScript
 TIDE - TypeScript Interactive Development Environment
 
@@ -411,7 +410,7 @@ TIDE - TypeScript Interactive Development Environment
 :ensure t
 :config
 (setq company-tooltip-align-annotations t)
-(add-hook 'before-save-hook 'tide-format-before-save)
+;;(add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+end_src
 
