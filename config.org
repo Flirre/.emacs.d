@@ -37,7 +37,7 @@ Lighter theme for lighter days.
   (add-to-list 'default-frame-alist
   '(font . "Inconsolata-14"))
   #+end_src
-* Sane defaults
+* Sane defaults / customizations
   #+begin_src emacs-lisp
   ;; Less prompting
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -78,6 +78,13 @@ Lighter theme for lighter days.
   #+begin_src emacs-lisp
   (setq auto-window-vscroll nil)
   #+end_src
+
+  Keybind for window resize
+#+begin_src emacs-lisp
+ (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+ (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+#+end_src
+
 * Keybindings
   Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
   Great if you don't want to memorize thousands of combinations of keys.
@@ -180,7 +187,7 @@ Lighter theme for lighter days.
 ** General
    Line numbering.
    #+begin_src emacs-lisp
-   (add-hook 'prog-mode-hook 'linum-mode)
+   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
    #+end_src
 
    Rainbow delimiters in all languages!
