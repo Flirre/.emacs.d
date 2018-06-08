@@ -395,7 +395,6 @@ EDTS - Erlang Development Tool Suite
 ;;(flycheck-add-mode 'typescript-tslint 'web-mode)
 #+end_src
 
-
 ** TypeScript
 TIDE - TypeScript Interactive Development Environment
 
@@ -428,6 +427,17 @@ TIDE - TypeScript Interactive Development Environment
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 #+end_src
 
+* Markdown
+Markdown mode
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+end_src
 * LaTeX
 #+begin_src emacs-lisp
 (use-package auctex
