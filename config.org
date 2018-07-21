@@ -116,6 +116,11 @@ Lighter theme for lighter days.
   (setq auto-revert-verbose nil)
   #+end_src
 
+  Auto revert all buffers
+  #+begin_src emacs-lisp
+  (global-auto-revert-mode 1)
+  #+end_src
+
   Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
   #+begin_src emacs-lisp
   (use-package swap-buffers
