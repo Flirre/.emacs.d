@@ -384,13 +384,13 @@ EDTS - Erlang Development Tool Suite
 
 ** CSS
 ** JavaScript
-  js2-mode for Js
-  #+begin_src emacs-lisp
-  (use-package js2-mode
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode)))
-  #+end_src
+#   js2-mode for Js
+#   #+begin_src emacs-lisp
+#   (use-package js2-mode
+#   :ensure t
+#   :config
+#   (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode)))
+#   #+end_src
 
 #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
@@ -398,8 +398,10 @@ EDTS - Erlang Development Tool Suite
           (lambda ()
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-;; enable typescript-tslint checker
-;;(flycheck-add-mode 'typescript-tslint 'web-mode)
+#+end_src
+#+begin_src emacs-lisp
+(add-hook 'javascript-mode-hook #'setup-tide-mode)
+
 #+end_src
 
 ** TypeScript
@@ -432,6 +434,7 @@ TIDE - TypeScript Interactive Development Environment
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+(flycheck-add-mode 'javascript-eslint 'web-mode)
 #+end_src
 
 * Markdown
