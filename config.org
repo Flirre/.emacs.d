@@ -424,7 +424,6 @@ TIDE - TypeScript Interactive Development Environment
 :after (typescript-mode company flycheck)
 :config
 (setq company-tooltip-align-annotations t)
-(add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+end_src
 
@@ -437,7 +436,7 @@ TIDE - TypeScript Interactive Development Environment
 (eldoc-mode +1)
 (tide-hl-identifier-mode +1)
 (company-mode +1)
-(setq tide-format-options '(:indentSize 2 :tabSize 2)))
+(prettier-js-mode))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -449,6 +448,20 @@ TIDE - TypeScript Interactive Development Environment
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package add-node-modules-path
+:ensure t
+:config
+(eval-after-load 'web-mode
+  '(add-hook 'web-mode-hook #'add-node-modules-path)))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package prettier-js
+:ensure t
+:diminish 'prettier-js-mode)
 #+end_src
 
 * Markdown
