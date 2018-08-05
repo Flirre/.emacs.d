@@ -60,6 +60,8 @@ Lighter theme for lighter days.
   :ensure t
   :config
   (global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
   (diminish 'company-mode))
 
   ;; Please no bars.
