@@ -415,8 +415,10 @@ TIDE - TypeScript Interactive Development Environment
 #+begin_src emacs-lisp
 (use-package tide
 :ensure t
+:after (typescript-mode company flycheck)
 :config
 (setq company-tooltip-align-annotations t)
+(add-hook 'before-save-hook 'tide-format-before-save)
 (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+end_src
 
@@ -428,7 +430,8 @@ TIDE - TypeScript Interactive Development Environment
 (setq flycheck-check-syntax-automatically '(save-mode-enabled))
 (eldoc-mode +1)
 (tide-hl-identifier-mode +1)
-(company-mode +1))
+(company-mode +1)
+(setq tide-format-options '(:indentSize 2 :tabSize 2)))
 #+end_src
 
 #+begin_src emacs-lisp
