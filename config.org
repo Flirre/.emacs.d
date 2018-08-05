@@ -406,7 +406,7 @@ EDTS - Erlang Development Tool Suite
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
-;;(flycheck-add-mode 'typescript-tslint 'web-mode)
+;;(flycheck-add-mode 'javascript-eslint 'web-mode)
 #+end_src
 
 ** TypeScript
