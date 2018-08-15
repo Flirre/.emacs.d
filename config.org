@@ -81,35 +81,34 @@ Lighter theme for lighter days.
   (setq auto-window-vscroll nil)
   #+end_src
 
-  Keybind for window resize
+* Keybindings
+which-key mode, great for finding and using new commands/
 #+begin_src emacs-lisp
- (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
- (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+  (use-package which-key
+  :ensure t
+  :diminish
+  :config
+  (which-key-mode t)
+  (which-key-setup-side-window-bottom))
+#+end_src
+
+This is where I'll keep my different keybindings for all kinds of
+things.
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-n w") 'make-frame-command)
+#+end_src
+
+Keybind for window resize
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
 #+end_src
 
 Rebind key to helm-imenu
 #+begin_src emacs-lisp
- (global-set-key (kbd "M-i") 'helm-imenu-in-all-buffers)
+  (global-set-key (kbd "M-i") 'helm-imenu-in-all-buffers)
 #+end_src
-* Keybindings
-  Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
-  Great if you don't want to memorize thousands of combinations of keys.
-  #+begin_src emacs-lisp
-  (use-package guide-key
-  :ensure t
-  :diminish guide-key-mode
-  :config
-  (setq guide-key/guide-key-sequence t
-	     guide-key/popup-window-position 'bottom
-	     guide-key/highlight-command-regexp ".*")
-  (guide-key-mode t))
-  #+end_src
 
-  This is where I'll keep my different keybindings for all kinds of
-  things.
-  #+begin_src emacs-lisp
-  (global-set-key (kbd "M-n w") 'make-frame-command)
-  #+end_src
 * Buffers
   Use ibuffer instead of list-buffers
   #+begin_src emacs-lisp
