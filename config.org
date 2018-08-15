@@ -87,6 +87,10 @@ Lighter theme for lighter days.
  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
 #+end_src
 
+Rebind key to helm-imenu
+#+begin_src emacs-lisp
+ (global-set-key (kbd "M-i") 'helm-imenu-in-all-buffers)
+#+end_src
 * Keybindings
   Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
   Great if you don't want to memorize thousands of combinations of keys.
