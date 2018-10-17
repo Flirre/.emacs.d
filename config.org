@@ -430,6 +430,7 @@ TIDE - TypeScript Interactive Development Environment
 (eldoc-mode +1)
 (tide-hl-identifier-mode +1)
 (company-mode +1)
+(setq web-mode-enable-auto-closing t)
 (prettier-js-mode))
 #+end_src
 
