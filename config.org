@@ -27,11 +27,13 @@ A package for smoother upgrading of packages.
 :ensure t)
 #+END_SRC
 * Themes
-** Adwaita
-Lighter theme for lighter days.
-#+begin_src emacs-lisp
-  (load-theme 'adwaita t)
-#+end_src
+** base16
+#+BEGIN_SRC emacs-lisp
+(use-package base16-theme
+:ensure t
+:config
+(load-theme 'base16-outrun-dark t))
+#+END_SRC
 * Font
 [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
 You can install it on Arch-Linux using packer, which would look like this:
