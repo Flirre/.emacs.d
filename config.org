@@ -2,43 +2,43 @@
 #+Author: Filip Lindahl
 
 * Customize settings
-  A custom file to keep customizations out of
-  [[file:init.el][init.el]]. All to declutter my [[file:init.el][init.el]].
-  #+begin_src emacs_lisp
+A custom file to keep customizations out of
+[[file:init.el][init.el]]. All to declutter my [[file:init.el][init.el]].
+#+begin_src emacs_lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file)
-  #+end_src
+#+end_src
 
-  Loading contents from a file containing all of my life ruining secrets.
-  #+begin_src emacs-lisp
+Loading contents from a file containing all of my life ruining secrets.
+#+begin_src emacs-lisp
   (if (file-exists-p "private.el") (load-file (concat user-emacs-directory "private.el")))
-  #+end_src
+#+end_src
 
-  Diminish mode, for less clutter.
-  #+begin_src emacs-lisp
+Diminish mode, for less clutter.
+#+begin_src emacs-lisp
   (use-package diminish
   :ensure t)
-  #+end_src
+#+end_src
 * Themes
 ** Adwaita
 Lighter theme for lighter days.
-   #+begin_src emacs-lisp
+#+begin_src emacs-lisp
   (load-theme 'adwaita t)
-   #+end_src
+#+end_src
 * Font
-  [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
-  You can install it on Arch-Linux using packer, which would look like this:
+[[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
+You can install it on Arch-Linux using packer, which would look like this:
 
-  #+begin_src sh
+#+begin_src sh
   packer -S ttf-inconsolata
-  #+end_src
-  And to tell Emacs to use that font you add:
-  #+begin_src emacs-lisp
+#+end_src
+And to tell Emacs to use that font you add:
+#+begin_src emacs-lisp
   (add-to-list 'default-frame-alist
   '(font . "Inconsolata-14"))
-  #+end_src
+#+end_src
 * Sane defaults / customizations
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
   ;; Less prompting
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -74,14 +74,9 @@ Lighter theme for lighter days.
 
   ;; Show matching parentheses
   (show-paren-mode)
-  #+end_src
+#+end_src
 
-  This is good for performance. Apparently.
-  #+begin_src emacs-lisp
-  (setq auto-window-vscroll nil)
-  #+end_src
-
-  Keybind for window resize
+This is good for performance. Apparently.
 #+begin_src emacs-lisp
  (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
@@ -90,136 +85,138 @@ Lighter theme for lighter days.
 #+end_src
 
 * Keybindings
-  Stolen from [[https://github.com/Jassob/.emacs.d][Jassobs Emacs config]].
-  Great if you don't want to memorize thousands of combinations of keys.
-  #+begin_src emacs-lisp
-  (use-package guide-key
+which-key mode, great for finding and using new commands/
+#+begin_src emacs-lisp
+  (use-package which-key
   :ensure t
-  :diminish guide-key-mode
+  :diminish
   :config
-  (setq guide-key/guide-key-sequence t
-	     guide-key/popup-window-position 'bottom
-	     guide-key/highlight-command-regexp ".*")
-  (guide-key-mode t))
-  #+end_src
+  (which-key-mode t)
+  (which-key-setup-side-window-bottom))
+#+end_src
 
-  This is where I'll keep my different keybindings for all kinds of
-  things.
-  #+begin_src emacs-lisp
+This is where I'll keep my different keybindings for all kinds of
+things.
+#+begin_src emacs-lisp
   (global-set-key (kbd "M-n w") 'make-frame-command)
-  (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-  #+end_src
-* Buffers
-  Use ibuffer instead of list-buffers
-  #+begin_src emacs-lisp
-  (defalias 'list-buffers 'ibuffer)
-  #+end_src
+#+end_src
 
-  Refresh dired in the background as well, BUT DON'T TELL ME!
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+#+end_src
+
+Keybind for window resize
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+#+end_src
+
+Rebind key to helm-imenu
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-i") 'helm-imenu-in-all-buffers)
+#+end_src
+
+* Buffers
+Use ibuffer instead of list-buffers
+#+begin_src emacs-lisp
+  (defalias 'list-buffers 'ibuffer)
+#+end_src
+
+Refresh dired in the background as well, BUT DON'T TELL ME!
+#+begin_src emacs-lisp
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
-  #+end_src
+#+end_src
 
-  Auto revert all buffers
-  #+begin_src emacs-lisp
+Auto revert all buffers
+#+begin_src emacs-lisp
   (global-auto-revert-mode 1)
-  #+end_src
+#+end_src
 
-  Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
-  #+begin_src emacs-lisp
+Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
+#+begin_src emacs-lisp
   (use-package swap-buffers
    :ensure t
    :bind
     ("M-s M-s" . swap-buffers))
-  #+end_src
+#+end_src
 * Recent files
-  Binding helms recentf to have recent files more easily accessible.
-  #+begin_src emacs-lisp
+Binding helms recentf to have recent files more easily accessible.
+#+begin_src emacs-lisp
   (use-package recentf
    :bind ("C-c C-r" . helm-recentf)
    :config
    (recentf-mode t)
    (setq recentf-max-saved-items 25))
-  #+end_src
+#+end_src
 * Org-mode
-  Visual lines in org mode for better readability.
-  #+begin_src emacs-lisp
+Visual lines in org mode for better readability.
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'visual-line-mode)
-  #+end_src
+#+end_src
 
-  Indent those headers for me please.
-  #+begin_src emacs-lisp
+Indent those headers for me please.
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'org-indent-mode)
-  #+end_src
+#+end_src
 
 * Helm
-  helm-M-x is a beautiful thing that always helps me find what command
-  I need.
-  #+begin_src emacs-lisp
+helm-M-x is a beautiful thing that always helps me find what command
+I need.
+#+begin_src emacs-lisp
   (use-package helm
   :ensure t
   :bind
    (("M-x" . helm-M-x)))
-   #+end_src
+#+end_src
 * Ido
-  Looking for things using Ido is a more efficient way of looking
-  while still keeping that "Emacs-way" of life.
-  #+begin_src emacs-lisp
+Looking for things using Ido is a more efficient way of looking
+while still keeping that "Emacs-way" of life.
+#+begin_src emacs-lisp
   (use-package ido
   :ensure t
   :config
   (ido-mode))
-  #+end_src
+#+end_src
 * Magit
-  Magit is a great interface for git. Much smoother than using command
-  line git.
-  #+begin_src emacs-lisp
+Magit is a great interface for git. Much smoother than using command
+line git.
+#+begin_src emacs-lisp
   (use-package magit
   :ensure t
   :defer t
   :bind ("C-c g" . magit-status)
   :config
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
-  #+end_src
-
-  Not using it right now, but will leave it here for people that might be interested.
-  # MagitHub
-  # #+begin_src emacs-lisp
-  # (use-package magithub
-  # :ensure t
-  # :defer t
-  # :after magit
-  # :config (magithub-feature-autoinject t))
-  # #+end_src
+#+end_src
 
 * Programming
 ** General
-   Line numbering.
-   #+begin_src emacs-lisp
+Line numbering.
+#+begin_src emacs-lisp
    (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-   #+end_src
+#+end_src
 
-   Rainbow delimiters in all languages!
-   #+begin_src emacs-lisp
+Rainbow delimiters in all languages!
+#+begin_src emacs-lisp
    (use-package rainbow-delimiters
    :ensure t
    :config
    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-   #+end_src
+#+end_src
 
-   Remove trailing whitespace when saving files.
-   #+begin_src emacs-lisp
+Remove trailing whitespace when saving files.
+#+begin_src emacs-lisp
    (add-hook 'before-save-hook 'delete-trailing-whitespace)
-   #+end_src
+#+end_src
 
-   Comment/uncomment regions of code.
-   #+begin_src emacs-lisp
+Comment/uncomment regions of code.
+#+begin_src emacs-lisp
    (global-set-key (kbd "C-x c") 'comment-or-uncomment-region)
-   #+end_src
+#+end_src
 
-   Multimarkers!
-   #+begin_src emacs-lisp
+Multimarkers!
+#+begin_src emacs-lisp
    (use-package multiple-cursors
    :ensure t
    :bind
@@ -227,7 +224,7 @@ Lighter theme for lighter days.
    ("C-s->" . mc/mark-next-like-this)
    ("C-s-<" . mc/mark-previous-like-this)
    ("C-s-h" . mc/mark-all-like-this)))
-   #+end_src
+#+end_src
 
    Line movement
    #+begin_src emacs-lisp
@@ -241,9 +238,9 @@ Lighter theme for lighter days.
    #+end_src
 
 ** Python
-   Some Python packages needed for a working Elpy env. should be
-   installed before elpy is installed and configured.
-   #+begin_src sh
+Some Python packages needed for a working Elpy env. should be
+installed before elpy is installed and configured.
+#+begin_src sh
    # Either of these
    pip install rope
    pip install jedi
@@ -255,18 +252,18 @@ Lighter theme for lighter days.
    pip install autopep8
    # and yapf for code formatting
    pip install yapf
-   #+end_src
-   Or you could the the whole install with a oneliner
-   #+begin_src sh
+#+end_src
+Or you could the the whole install with a oneliner
+#+begin_src sh
    pip install jedi flake8 importmagic autopep8
-   #+end_src
-   Enables Elpy, a nice Python environment.
-   #+begin_src emacs-lisp
+#+end_src
+Enables Elpy, a nice Python environment.
+#+begin_src emacs-lisp
    (use-package elpy
    :ensure t
    :config
     (add-hook 'python-mode-hook 'elpy-enable))
-   #+end_src
+#+end_src
 ** C++
 
 Parse header files with C++ parsing.
@@ -355,7 +352,6 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 (add-to-list 'company-backends 'company-omnisharp))
 #+end_src
 ** SQL
-
 #+begin_src emacs-lisp
 (use-package sqlformat
 :ensure t
@@ -368,40 +364,33 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 
 * Web Development
 ** Server
-  Impatient mode, showing changes made to your page immediately.
-  Access at localhost:8080/imp
-  #+begin_src emacs-lisp
+Impatient mode, showing changes made to your page immediately.
+Access at localhost:8080/imp
+#+begin_src emacs-lisp
   (use-package impatient-mode
   :ensure t
   :config
   (add-hook 'web-mode-hook 'impatient-mode))
-  #+end_src
+#+end_src
 
-  Simple-httpd, needed for impatient-mode.
-  Also starts browser on page.
-  #+begin_src emacs-lisp
+Simple-httpd, needed for impatient-mode.
+Also starts browser on page.
+#+begin_src emacs-lisp
   (use-package simple-httpd
   :ensure t)
-  #+end_src
+#+end_src
 
 ** HTML
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
   (use-package web-mode
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-  #+end_src
+#+end_src
 
 ** CSS
-** JavaScript
-#   js2-mode for Js
-#   #+begin_src emacs-lisp
-#   (use-package js2-mode
-#   :ensure t
-#   :config
-#   (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode)))
-#   #+end_src
 
+** JavaScript
 #+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
   (add-hook 'web-mode-hook
@@ -419,7 +408,6 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 #+end_src
 
 Indium
-
 #+begin_src emacs-lisp
 (use-package indium
 :ensure t)
@@ -486,7 +474,10 @@ Markdown mode
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 #+end_src
+
 * LaTeX
+Auctex for Latex
+
 #+begin_src emacs-lisp
 (use-package auctex
 :defer t
@@ -501,9 +492,11 @@ Markdown mode
  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
  (setq reftex-plug-into-AUCTeX t))
 #+end_src
+
 * Spotify Bindings
-  Keybindings so that I can control Spotify without switching focus from Emacs.
-  #+begin_src emacs-lisp
+Keybindings so that I can control Spotify without switching focus from Emacs.
+
+#+begin_src emacs-lisp
   (use-package spotify
   :ensure t
   :bind (("M-s M-n" . spotify-next)
@@ -511,10 +504,12 @@ Markdown mode
          ("M-p" . spotify-playpause)
 	 ("M-s M-c" . spotify-current)
 	 ("<XF86AudioPlay>" . spotify-play)))
-  #+end_src
+#+end_src
+
 * TRAMP/Sudo
-  I borrowed this from somewhere. It makes sudo access much smoother.
-  #+begin_src emacs-lisp
+I borrowed this from somewhere. It makes sudo access much smoother.
+
+#+begin_src emacs-lisp
   (defvar find-file-root-prefix (if (featurep 'xemacs) "/[sudo/root@localhost]" "/sudo:root@localhost:" )
   "*The filename prefix used to open a file with `find-file-root'.")
 
