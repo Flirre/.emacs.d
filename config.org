@@ -354,29 +354,18 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
 (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
 (add-to-list 'company-backends 'company-omnisharp))
 #+end_src
-** Erlang
-EDTS - Erlang Development Tool Suite
-#+begin_src emacs-lisp
-(use-package edts
-:ensure t
-:init
-(require 'edts-start))
-#+end_src
-** Java
-#+begin_src emacs-lisp
-(use-package meghanada
-:ensure t
-:bind
-(:map meghanada-mode-map
-(("C-M-o" . meghanada-optimize-import)
-("C-M-t" . meghanada-import-all)))
-:config
-(add-hook 'java-mode-hook 'tkj-java-meghanda-mode-hook))
+** SQL
 
-(defun tkj-java-meghanda-mode-hook ()
-(meghanada-mode)
-(flycheck-mode))
+#+begin_src emacs-lisp
+(use-package sqlformat
+:ensure t
+:defer t
+:config
+(setq sqlformat-command "pg_format")
+(setq sqlformat-mode-format-on-save t)
+(add-hook 'sql-mode-hook 'sqlformat-mode))
 #+end_src
+
 * Web Development
 ** Server
   Impatient mode, showing changes made to your page immediately.
