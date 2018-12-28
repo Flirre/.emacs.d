@@ -418,6 +418,13 @@ Company-glsl requires glslangValidator which can be found [[https://github.com/K
   ;; (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
 #+end_src
 
+Indium
+
+#+begin_src emacs-lisp
+(use-package indium
+:ensure t)
+#+end_src
+
 ** TypeScript
 TIDE - TypeScript Interactive Development Environment
 
