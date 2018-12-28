@@ -85,6 +85,8 @@ Lighter theme for lighter days.
 #+begin_src emacs-lisp
  (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+ (global-set-key (kbd "C-s-<up>") 'enlarge-window)
+ (global-set-key (kbd "C-s-<down>") 'shrink-window)
 #+end_src
 
 * Keybindings
@@ -105,6 +107,7 @@ Lighter theme for lighter days.
   things.
   #+begin_src emacs-lisp
   (global-set-key (kbd "M-n w") 'make-frame-command)
+  (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
   #+end_src
 * Buffers
   Use ibuffer instead of list-buffers
@@ -224,6 +227,17 @@ Lighter theme for lighter days.
    ("C-s->" . mc/mark-next-like-this)
    ("C-s-<" . mc/mark-previous-like-this)
    ("C-s-h" . mc/mark-all-like-this)))
+   #+end_src
+
+   Line movement
+   #+begin_src emacs-lisp
+   (use-package move-dup
+   :ensure t
+   :bind
+   (("M-<up>" . 'md/move-lines-up)
+   (("M-<down>" . 'md/move-lines-down))
+   (("C-M-<up>" . 'md/duplicate-up)
+   (("C-M-<down>" . 'md/duplicate-down)))))
    #+end_src
 
 ** Python
