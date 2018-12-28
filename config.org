@@ -36,15 +36,13 @@ A package for smoother upgrading of packages.
 #+END_SRC
 * Font
 [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant  monospaced font.
-You can install it on Arch-Linux using packer, which would look like this:
-
+You can install it on Arch Linux using an AUR-helper such as yay, which would look like this:
 #+begin_src sh
-  packer -S ttf-inconsolata
+  yay -S ttf-inconsolata
 #+end_src
 And to tell Emacs to use that font you add:
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist
-  '(font . "Inconsolata-14"))
+(set-frame-font "Inconsolata-14:bold" nil t)
 #+end_src
 * Sane defaults / customizations
 #+begin_src emacs-lisp
