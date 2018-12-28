@@ -545,3 +545,12 @@ Markdown mode
 
 (global-set-key [(control x) (control r)] 'find-file-root)
   #+end_src
+* Telephone Line
+A package with an implementation of Powerline for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+(use-package telephone-line
+:ensure t
+:config
+(telephone-line-mode 1))
+#+END_SRC
