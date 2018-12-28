@@ -185,9 +185,10 @@ while still keeping that "Emacs-way" of life.
   :config
   (ido-mode))
 #+end_src
-* Magit
-Magit is a great interface for git. Much smoother than using command
-line git.
+* Git
+** Magit
+Magit is a great interface for git. Much smoother than using
+commandline git.
 #+begin_src emacs-lisp
   (use-package magit
   :ensure t
@@ -196,7 +197,14 @@ line git.
   :config
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
 #+end_src
-
+** Forge
+A package from the creator of magit which allows the user to interact
+with Git forges such as GitHub and GitLab while using Emacs and Magit.
+#+BEGIN_SRC emacs-lisp
+(use-package forge
+:ensure t
+:after magit)
+#+END_SRC
 * Programming
 ** General
 Line numbering.

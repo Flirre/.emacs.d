@@ -70,3 +70,4 @@ ido.*
 ac-comphist.dat
 .mc-lists.el
 /.cache/
+*.sqlite
