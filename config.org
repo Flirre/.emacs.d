@@ -253,6 +253,14 @@ Multimarkers!
    (("C-M-<down>" . 'md/duplicate-down)))))
    #+end_src
 
+Show flycheck errors inline.
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-inline
+:ensure t
+:after flycheck
+:hook (flycheck-mode . flycheck-inline-mode))
+
+#+END_SRC
 ** Python
 Some Python packages needed for a working Elpy env. should be
 installed before elpy is installed and configured.
