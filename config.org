@@ -84,7 +84,14 @@ And to tell Emacs to use that font you run:
   (show-paren-mode)
 #+end_src
 
-This is good for performance. Apparently.
+[[https://github.com/adamrt/sane-term][sane-term]] provides ansi-term with some sane defaults making for a smoother experience.
+#+BEGIN_SRC emacs-lisp
+(use-package sane-term
+  :ensure t
+  :bind (
+    ("C-x t" . sane-term)
+    ("C-x T" . sane-term-create)))
+#+END_SRC
 
 
 * Keybindings
