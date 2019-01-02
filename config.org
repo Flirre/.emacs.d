@@ -85,12 +85,7 @@ And to tell Emacs to use that font you run:
 #+end_src
 
 This is good for performance. Apparently.
-#+begin_src emacs-lisp
- (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
- (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
- (global-set-key (kbd "C-s-<up>") 'enlarge-window)
- (global-set-key (kbd "C-s-<down>") 'shrink-window)
-#+end_src
+
 
 * Keybindings
 which-key mode, great for finding and using new commands/
@@ -115,8 +110,10 @@ things.
 
 Keybind for window resize
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
-  (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+ (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
+ (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
+ (global-set-key (kbd "C-s-<up>") 'enlarge-window)
+ (global-set-key (kbd "C-s-<down>") 'shrink-window)
 #+end_src
 
 Rebind key to helm-imenu
