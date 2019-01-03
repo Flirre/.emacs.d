@@ -185,6 +185,7 @@ Store diary entries in a synced file.
 Show Agenda when starting Emacs.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'emacs-startup-hook #'org-agenda-list)
+(setq initial-buffer-choice (lambda () (get-buffer "*Org Agenda*")))
 #+END_SRC
 
 * Helm
