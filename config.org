@@ -168,6 +168,11 @@ Indent those headers for me please.
   (add-hook 'org-mode-hook 'org-indent-mode)
 #+end_src
 
+Agenda mode for organization.
+#+BEGIN_SRC
+  (global-set-key (kbd "C-c a") 'org-agenda)
+#+END_SRC
+
 * Helm
 helm-M-x is a beautiful thing that always helps me find what command
 I need.
