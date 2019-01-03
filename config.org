@@ -173,8 +173,18 @@ Indent those headers for me please.
 #+end_src
 
 Agenda mode for organization.
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
+#+END_SRC
+
+Store diary entries in a synced file.
+#+BEGIN_SRC emacs-lisp
+(setq diary-file "~/agenda/diary.org")
+#+END_SRC
+
+Show Agenda when starting Emacs.
+#+BEGIN_SRC emacs-lisp
+(add-hook 'emacs-startup-hook #'org-agenda-list)
 #+END_SRC
 
 * Helm
