@@ -192,6 +192,16 @@ Show Agenda when starting Emacs.
 (setq initial-buffer-choice (lambda () (get-buffer "*Org Agenda*")))
 #+END_SRC
 
+Some personal preference Org-mode settings.
++ Org-mode deadlines do not warn until 7 days are left.
++ Agenda times have a leading zero to make a more symmetric agenda.
++ Calendar has 12 for left margin to have it better centered.
+#+BEGIN_SRC emacs-lisp
+(setq org-deadline-warning-days 7)
+(setq org-agenda-time-leading-zero t)
+(setq calendar-left-margin 12)
+#+END_SRC
+
 * Helm
 helm-M-x is a beautiful thing that always helps me find what command
 I need.
