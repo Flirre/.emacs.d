@@ -26,6 +26,26 @@ A package for smoother upgrading of packages.
 (use-package package-utils
 :ensure t)
 #+END_SRC
+* Dashboard
+The package [[https://github.com/rakanalh/emacs-dashboard][emacs-dashboard]] is a package that provides a dashboard to
+get a quick overview of different things while inside Emacs.
+For example projects via Projectile, agenda-view via Org-Agenda, etc.
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-page-separator "\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n")
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+#+END_SRC
+
+Customizing what is shown on the dashboard.
+#+BEGIN_SRC emacs-lisp
+(setq dashboard-banner-logo-title nil)
+(setq dashboard-items '((agenda . 10)
+                        (projects . 3)
+                        (recents  . 3)))
+#+END_SRC
 * Themes
 ** base16
 #+BEGIN_SRC emacs-lisp
@@ -184,12 +204,6 @@ Add all agenda files to agenda.
 Store diary entries in a synced file.
 #+BEGIN_SRC emacs-lisp
 (setq diary-file "~/agenda/diary.org")
-#+END_SRC
-
-Show Agenda when starting Emacs.
-#+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-startup-hook #'org-agenda-list)
-(setq initial-buffer-choice (lambda () (get-buffer "*Org Agenda*")))
 #+END_SRC
 
 Some personal preference Org-mode settings.
