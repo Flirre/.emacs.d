@@ -202,6 +202,17 @@ Some personal preference Org-mode settings.
 (setq calendar-left-margin 12)
 #+END_SRC
 
+* Project management
+[[https://github.com/bbatsov/projectile][Projectile]] is a package that provides Emacs with a way to easier interact with the files a project.
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+:ensure t
+:bind-keymap
+("C-c p" . projectile-command-map)
+("s-p" . projectile-command-map)
+:config
+(projectile-mode +1))
+#+END_SRC
 * Helm
 helm-M-x is a beautiful thing that always helps me find what command
 I need.
