@@ -216,6 +216,14 @@ Some personal preference Org-mode settings.
 (setq calendar-left-margin 12)
 #+END_SRC
 
+Since I want extra Agenda TODO-states to show that a task is
+in-progress or if something is canceled, I've added them to the Org
+Todo Keywords.
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords
+'((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELED(c)")))
+#+END_SRC
+
 * Project management
 [[https://github.com/bbatsov/projectile][Projectile]] is a package that provides Emacs with a way to easier interact with the files a project.
 #+BEGIN_SRC emacs-lisp
