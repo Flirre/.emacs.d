@@ -198,7 +198,7 @@ Agenda mode for organization.
 
 Add all agenda files to agenda.
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/agenda"))
+(setq org-agenda-files '("~/agenda/"))
 #+END_SRC
 
 Store diary entries in a synced file.
@@ -222,6 +222,12 @@ Todo Keywords.
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
 '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELED(c)")))
+#+END_SRC
+
+Redefining stuck-projects as TODO items that aren't scheduled.
+#+BEGIN_SRC emacs-lisp
+(setq org-stuck-projects
+'("TODO={.+}/-DONE" nil nil "SCHEDULED:\\|DEADLINE:"))
 #+END_SRC
 
 * Project management
