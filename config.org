@@ -206,6 +206,23 @@ Set correct path for archiving.
 (setq org-archive-location "~/agenda/archives/%s_archive::")
 #+END_SRC
 
+Function to insert an :ARCHIVE: property with corresponding header.
+#+BEGIN_SRC emacs-lisp
+(defun org-insert-archive ()
+"Inserts an :ARCHIVE: property under the current header."
+(interactive)
+(save-excursion
+(org-back-to-heading t)
+(next-line)
+(insert ":ARCHIVE: %s_archive::* " (org-get-heading t t t t))
+(newline)))
+#+END_SRC
+
+Set keybinding for adding archive propery
+#+BEGIN_SRC emacs-lisp
+  ;; (define-key org-mode-map (kbd "C-c C-x s") 'org-insert-archive)
+#+END_SRC
+
 Store diary entries in a synced file.
 #+BEGIN_SRC emacs-lisp
 (setq diary-file "~/agenda/diary.org")
