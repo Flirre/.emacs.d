@@ -229,6 +229,11 @@ Todo Keywords.
 '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELED(c)")))
 #+END_SRC
 
+Extra keybind for quick access to org files from Agenda view.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-'") 'org-cycle-agenda-files)
+#+END_SRC
+
 * Project management
 [[https://github.com/bbatsov/projectile][Projectile]] is a package that provides Emacs with a way to easier interact with the files a project.
 #+BEGIN_SRC emacs-lisp
