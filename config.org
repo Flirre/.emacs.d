@@ -201,6 +201,11 @@ Add all agenda files to agenda.
 (setq org-agenda-files '("~/agenda"))
 #+END_SRC
 
+Set correct path for archiving.
+#+BEGIN_SRC emacs-lisp
+(setq org-archive-location "~/agenda/archives/%s_archive::")
+#+END_SRC
+
 Store diary entries in a synced file.
 #+BEGIN_SRC emacs-lisp
 (setq diary-file "~/agenda/diary.org")
