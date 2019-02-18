@@ -212,15 +212,24 @@ Function to insert an :ARCHIVE: property with corresponding header.
 "Inserts an :ARCHIVE: property under the current header."
 (interactive)
 (save-excursion
-(org-back-to-heading t)
-(next-line)
-(insert ":ARCHIVE: %s_archive::* " (org-get-heading t t t t))
-(newline)))
+(outline-back-to-heading t)
+(end-of-line)
+(newline)
+(insert ":ARCHIVE: %s_archive::* " (org-get-heading t t t t))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun org-insert-archive-all ()
+"Inserts :ARCHIVE: on all headings that do not already have it."
+(interactive)
+(save-excursion
+(org-map-entries #'org-insert-archive nil nil 'archive)
+))
 #+END_SRC
 
 Set keybinding for adding archive propery
 #+BEGIN_SRC emacs-lisp
-  ;; (define-key org-mode-map (kbd "C-c C-x s") 'org-insert-archive)
+   (define-key org-mode-map (kbd "C-c C-x s") 'org-insert-archive)
 #+END_SRC
 
 Store diary entries in a synced file.
