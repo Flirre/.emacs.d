@@ -405,92 +405,92 @@ Enables Elpy, a nice Python environment.
 (add-hook 'sql-mode-hook 'sqlformat-mode))
 #+end_src
 
-* Web Development
-** Server
-Impatient mode, showing changes made to your page immediately.
-Access at localhost:8080/imp
-#+begin_src emacs-lisp
-  (use-package impatient-mode
-  :ensure t
-  :config
-  (add-hook 'web-mode-hook 'impatient-mode))
-#+end_src
-
-Simple-httpd, needed for impatient-mode.
-Also starts browser on page.
-#+begin_src emacs-lisp
-  (use-package simple-httpd
-  :ensure t)
-#+end_src
-
-** HTML
+** Web Development
+*** Web-mode
+Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.io/emacs/2017/08/21/web-development-in-emacs][fransiska]].
 #+begin_src emacs-lisp
   (use-package web-mode
   :ensure t
+  :mode (
+  ("\\.html?\\'" . web-mode)
+  ("\\.tsx\\'" . web-mode)
+  ("\\.jsx\\'" . web-mode))
   :config
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-#+end_src
-
-** CSS
-
-** JavaScript
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-current-element-highlight t)
+  (defun my-web-mode-hook ()
+    (when (string-equal "html" (file-name-extension buffer-file-name))
+    (set (make-local-variable 'company-backends) '(company-css company-web-html company-yasnippet company-files )))
+  )
+  (add-hook 'web-mode-hook 'my-web-mode-hook)
   (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "jsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode))))
-  ;; configure jsx-tide checker to run after your default jsx checker
-  ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
-  ;; (flycheck-add-mode 'jsx-tide 'web-mode)
+    (defun setup/tsx ()
+    (setq flycheck-checker 'tsx-tide)
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (tide-setup)
+    (tide-hl-identifier-mode)
+    (eldoc-mode)
+  (flycheck-mode))))
+  )
 #+end_src
 
-#+begin_src emacs-lisp
-  (add-hook 'js2-mode-hook #'setup-tide-mode)
-  ;; (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(use-package company-web
+:ensure t
+:defer t
+:init
+(with-eval-after-load 'company
+(add-to-list 'company-backends 'company-web-html)))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package emmet-mode
+:ensure t
+:defer t
+:hook
+(web-mode . emmet-mode)
+(css-mode . emmet-mode)
+(scss-mode . emmet-mode)
+:config
+(setq emmet-move-cursor-between-quotes t)
+;;(setq emmet-expand-jsx-className? t) For use with React jsx
+)
+#+END_SRC
+
+*** JavaScript
 Indium
 #+begin_src emacs-lisp
 (use-package indium
 :ensure t)
 #+end_src
 
-** TypeScript
+*** TypeScript
 TIDE - TypeScript Interactive Development Environment
-
+Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 #+begin_src emacs-lisp
 (use-package tide
-:ensure t
-:after (typescript-mode company flycheck)
-:config
-(setq company-tooltip-align-annotations t)
-(add-hook 'typescript-mode-hook #'setup-tide-mode))
+  :ensure t
+  :after (typescript-mode company flycheck))
 #+end_src
 
-#+begin_src emacs-lisp
-(defun setup-tide-mode ()
-(interactive)
-(tide-setup)
-(flycheck-mode +1)
-(setq flycheck-check-syntax-automatically '(save))
-(eldoc-mode +1)
-(tide-hl-identifier-mode +1)
-(company-mode +1)
-(setq web-mode-enable-auto-closing t)
-(prettier-js-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-;; enable typescript-tslint checker
-(flycheck-add-mode 'typescript-tslint 'web-mode)
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(use-package typescript-mode
+  :ensure t
+  :mode "\\.ts\\'"
+  :config
+  (add-hook
+  'typescript-mode-hook
+  (defun setup/typescript ()
+  (interactive)
+  (tide-setup)
+  (tide-hl-identifier-mode))))
+#+END_SRC
 
 #+begin_src emacs-lisp
 (use-package add-node-modules-path
