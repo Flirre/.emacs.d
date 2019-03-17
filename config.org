@@ -159,7 +159,7 @@ Use ibuffer instead of list-buffers
   (defalias 'list-buffers 'ibuffer)
 #+end_src
 
-Refresh dired in the background as well, BUT DON'T TELL ME!
+Refresh dired in the background as well, quietly.
 #+begin_src emacs-lisp
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
@@ -176,15 +176,6 @@ Swap-buffers is a package that makes it easier to swap around buffers to get the
    :ensure t
    :bind
     ("M-s M-s" . swap-buffers))
-#+end_src
-* Recent files
-Binding helms recentf to have recent files more easily accessible.
-#+begin_src emacs-lisp
-  (use-package recentf
-   :bind ("C-c C-r" . helm-recentf)
-   :config
-   (recentf-mode t)
-   (setq recentf-max-saved-items 25))
 #+end_src
 * Org-mode
 Visual lines in org mode for better readability.
@@ -233,7 +224,7 @@ Function to insert an :ARCHIVE: property with corresponding header.
 ))
 #+END_SRC
 
-Set keybinding for adding archive propery
+Set keybinding for adding archive property
 #+BEGIN_SRC emacs-lisp
    (define-key org-mode-map (kbd "C-c C-x s") 'org-insert-archive)
 #+END_SRC
@@ -357,7 +348,7 @@ Multimarkers!
    ("C-s-h" . mc/mark-all-like-this)))
 #+end_src
 
-   Line movement
+Line movement
    #+begin_src emacs-lisp
    (use-package move-dup
    :ensure t
@@ -547,17 +538,16 @@ Auctex for Latex
 
 * Spotify Bindings
 Keybindings so that I can control Spotify without switching focus from Emacs.
-
 #+begin_src emacs-lisp
-  (use-package spotify
-  :ensure t
-  :bind (("M-s M-n" . spotify-next)
-         ("M-s M-p" . spotify-previous)
-         ("M-p" . spotify-playpause)
-	 ("M-s M-c" . spotify-current)
-	 ("<XF86AudioPlay>" . spotify-play)))
+(use-package spotify
+:ensure t
+:bind (
+("M-s M-n" . spotify-next)
+("M-s M-p" . spotify-previous)
+("M-p" . spotify-playpause)
+("M-s M-c" . spotify-current)
+("<XF86AudioPlay>" . spotify-play)))
 #+end_src
-
 * TRAMP/Sudo
 I borrowed this from somewhere. It makes sudo access much smoother.
 
