@@ -597,14 +597,10 @@ A package with an implementation of Powerline for Emacs.
 (use-package telephone-line
 :ensure t
 :config
-(face-spec-set 'telephone-line-accent-active  '((t :background "#50507a"
-      :weight bold
-      ))
- 'face-defface-spec)
-(face-spec-set 'telephone-line-accent-inactive  '((t :background "#30305a"
-      :weight bold
-      ))
- 'face-defface-spec)
+(face-spec-set 'telephone-line-accent-active  '((t :background "#50507a"))
+'face-defface-spec)
+(face-spec-set 'telephone-line-accent-inactive  '((t :background "#30305a"))
+'face-defface-spec)
 (telephone-line-mode 1))
 #+END_SRC
 * Navigation
