@@ -88,6 +88,7 @@ And to tell Emacs to use that font you run:
   :ensure t
   :config
   (global-company-mode)
+  (setq company-global-modes '(not magit-status-mode))
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
   (diminish 'company-mode))
@@ -146,6 +147,11 @@ Rebind key to helm-imenu
 #+begin_src emacs-lisp
   (global-set-key (kbd "M-i") 'helm-imenu-in-all-buffers)
 #+end_src
+
+Keybinding for running company (conflict with Magit-status-mode)
+#+BEGIN_SRC emacs-lisp
+(define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+#+END_SRC
 
 * Buffers
 Use ibuffer instead of list-buffers
