@@ -503,7 +503,9 @@ TIDE - TypeScript Interactive Development Environment
 #+begin_src emacs-lisp
 (use-package prettier-js
 :ensure t
-:diminish 'prettier-js-mode)
+:diminish 'prettier-js-mode
+:hook
+(web-mode . prettier-js-mode))
 #+end_src
 
 * Markdown
