@@ -607,3 +607,13 @@ A package with an implementation of Powerline for Emacs.
  'face-defface-spec)
 (telephone-line-mode 1))
 #+END_SRC
+* Navigation
+[[https://github.com/winterTTr/ace-jump-mode][Ace-jump-mode]] to be able to quickly jump around in buffers by specifying letters.
+#+BEGIN_SRC emacs-lisp
+(use-package ace-jump-mode
+:ensure t
+:bind
+("C-." . ace-jump-mode)
+:config
+(setq ace-jump-mode-gray-background nil))
+#+END_SRC
