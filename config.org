@@ -518,6 +518,8 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 (use-package typescript-mode
   :ensure t
   :mode "\\.ts\\'"
+  :hook
+  (typescript-mode . prettier-js-mode)
   :config
   (add-hook
   'typescript-mode-hook
