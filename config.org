@@ -275,6 +275,19 @@ Redefining stuck-projects as TODO items that aren't scheduled.
 :config
 (projectile-mode +1))
 #+END_SRC
+
+Searching via ag
+#+BEGIN_SRC emacs-lisp
+(use-package ag
+:ensure t)
+#+END_SRC
+
+Using Helm
+#+BEGIN_SRC emacs-lisp
+(use-package helm-ag
+:ensure t
+:after ag helm)
+#+END_SRC
 * Helm
 helm-M-x is a beautiful thing that always helps me find what command
 I need.
