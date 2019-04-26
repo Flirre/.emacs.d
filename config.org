@@ -478,6 +478,27 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
 #+END_SRC
 
 *** JavaScript
+
+#+BEGIN_SRC emacs-lisp
+(use-package rjsx-mode
+  :ensure t
+  :mode ("\\.js\\'")
+  :hook
+  (rjsx-mode . prettier-js-mode)
+  :config
+  (add-hook
+  'rjsx-mode-hook
+  (defun setup/javascript ()
+  (interactive)
+;; configure jsx-tide checker to run after your default jsx checker
+  (tide-setup)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+  (tide-hl-identifier-mode)
+  (eldoc-mode)
+  (flycheck-mode))))
+
+#+END_SRC
 Indium
 #+begin_src emacs-lisp
 (use-package indium
