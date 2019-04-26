@@ -91,6 +91,7 @@ And to tell Emacs to use that font you run:
   (setq company-global-modes '(not magit-status-mode))
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
   (diminish 'company-mode))
 
   ;; Please no bars.
