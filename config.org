@@ -650,3 +650,11 @@ A package with an implementation of Powerline for Emacs.
 :config
 (setq ace-jump-mode-gray-background nil))
 #+END_SRC
+* PDF
+#+BEGIN_SRC emacs-lisp
+(use-package pdf-tools
+:ensure t
+:config
+(pdf-loader-install))
+
+#+END_SRC
