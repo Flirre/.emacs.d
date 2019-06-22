@@ -387,10 +387,10 @@ Line movement
    (use-package move-dup
    :ensure t
    :bind
-   (("M-<up>" . 'md/move-lines-up)
-   (("M-<down>" . 'md/move-lines-down))
-   (("C-M-<up>" . 'md/duplicate-up)
-   (("C-M-<down>" . 'md/duplicate-down)))))
+   (("M-<up>" . 'md-move-lines-up)
+   (("M-<down>" . 'md-move-lines-down))
+   (("C-M-<up>" . 'md-duplicate-up)
+   (("C-M-<down>" . 'md-duplicate-down)))))
    #+end_src
 
 Show flycheck errors inline.
