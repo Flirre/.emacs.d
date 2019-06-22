@@ -163,6 +163,17 @@ Keybinding for running company (conflict with Magit-status-mode)
 (define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 #+END_SRC
 
+Keyboard shortcut for reverting buffer without confirming.
+#+BEGIN_SRC emacs-lisp
+  (defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive) (revert-buffer t t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-S-R") 'revert-buffer-no-confirm)
+#+END_SRC
+
 * Buffers
 Use ibuffer instead of list-buffers
 #+begin_src emacs-lisp
