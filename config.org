@@ -115,6 +115,15 @@ And to tell Emacs to use that font you run:
     ("C-x T" . sane-term-create)))
 #+END_SRC
 
+The kill ring can be a pain to browse through using M-y.
+That's why we use popup-kill-ring instead!
+
+#+BEGIN_SRC emacs-lisp
+(use-package popup-kill-ring
+:ensure t
+:bind ("M-y" . popup-kill-ring))
+#+END_SRC
+
 * Keybindings
 which-key mode, great for finding and using new commands/
 #+begin_src emacs-lisp
