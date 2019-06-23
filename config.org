@@ -35,16 +35,16 @@ For example projects via Projectile, agenda-view via Org-Agenda, etc.
   :ensure t
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-page-separator "\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n")
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 #+END_SRC
 
 Customizing what is shown on the dashboard.
 #+BEGIN_SRC emacs-lisp
 (setq dashboard-banner-logo-title nil)
+(setq dashboard-center-content t)
 (setq dashboard-items '((agenda . 10)
-                        (projects . 3)
-                        (recents  . 3)))
+                        (projects . 5)
+                        (recents  . 5)))
 #+END_SRC
 * Themes
 ** base16
