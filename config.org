@@ -160,15 +160,15 @@ Use ibuffer instead of list-buffers
   (defalias 'list-buffers 'ibuffer)
 #+end_src
 
+Auto revert all buffers
+#+begin_src emacs-lisp
+  (global-auto-revert-mode 1)
+#+end_src
+
 Refresh dired in the background as well, quietly.
 #+begin_src emacs-lisp
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
-#+end_src
-
-Auto revert all buffers
-#+begin_src emacs-lisp
-  (global-auto-revert-mode 1)
 #+end_src
 
 Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
