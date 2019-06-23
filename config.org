@@ -115,6 +115,15 @@ And to tell Emacs to use that font you run:
     ("C-x T" . sane-term-create)))
 #+END_SRC
 
+The kill ring can be a pain to browse through using M-y.
+That's why we use popup-kill-ring instead!
+
+#+BEGIN_SRC emacs-lisp
+(use-package popup-kill-ring
+:ensure t
+:bind ("M-y" . popup-kill-ring))
+#+END_SRC
+
 * Keybindings
 which-key mode, great for finding and using new commands/
 #+begin_src emacs-lisp
@@ -152,6 +161,17 @@ Rebind key to helm-imenu
 Keybinding for running company (conflict with Magit-status-mode)
 #+BEGIN_SRC emacs-lisp
 (define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+#+END_SRC
+
+Keyboard shortcut for reverting buffer without confirming.
+#+BEGIN_SRC emacs-lisp
+  (defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive) (revert-buffer t t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-S-R") 'revert-buffer-no-confirm)
 #+END_SRC
 
 * Buffers
@@ -367,10 +387,10 @@ Line movement
    (use-package move-dup
    :ensure t
    :bind
-   (("M-<up>" . 'md/move-lines-up)
-   (("M-<down>" . 'md/move-lines-down))
-   (("C-M-<up>" . 'md/duplicate-up)
-   (("C-M-<down>" . 'md/duplicate-down)))))
+   (("M-<up>" . 'md-move-lines-up)
+   (("M-<down>" . 'md-move-lines-down))
+   (("C-M-<up>" . 'md-duplicate-up)
+   (("C-M-<down>" . 'md-duplicate-down)))))
    #+end_src
 
 Show flycheck errors inline.
