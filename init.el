@@ -22,11 +22,6 @@
   (require 'use-package))
 (require 'bind-key)
 
-;; Start emacs-server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 (org-babel-load-file (concat user-emacs-directory "config.org"))
 
 ;; Less garbage
