@@ -16,15 +16,13 @@ Loading contents from a file containing all of my life ruining secrets.
 
 Diminish mode, for less clutter.
 #+begin_src emacs-lisp
-  (use-package diminish
-  :ensure t)
+  (use-package diminish)
 #+end_src
 * Package managing
 ** Package utils
 A package for smoother upgrading of packages.
 #+BEGIN_SRC emacs-lisp
-(use-package package-utils
-:ensure t)
+(use-package package-utils)
 #+END_SRC
 * Dashboard
 The package [[https://github.com/rakanalh/emacs-dashboard][emacs-dashboard]] is a package that provides a dashboard to
@@ -32,7 +30,6 @@ get a quick overview of different things while inside Emacs.
 For example projects via Projectile, agenda-view via Org-Agenda, etc.
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard
-  :ensure t
   :config
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
@@ -50,7 +47,6 @@ Customizing what is shown on the dashboard.
 ** base16
 #+BEGIN_SRC emacs-lisp
 (use-package base16-theme
-:ensure t
 :config
 (load-theme 'base16-outrun-dark t))
 #+END_SRC
@@ -136,7 +132,7 @@ Even Better Defaults from [[https://github.com/ianpan870102/.emacs.d][Ian's Yay-
 (use-package flycheck
   :hook (after-init . global-flycheck-mode))
 
-;; Selecting buffers/files with great efficiency. In my opinion, Ido is enough to replace Ivy and Helm. We install ido-vertical to get a better view of the available options (use C-n, C-p or arrow keys to navigate). 
+;; Selecting buffers/files with great efficiency. In my opinion, Ido is enough to replace Ivy and Helm. We install ido-vertical to get a better view of the available options (use C-n, C-p or arrow keys to navigate).
 ;; Flex matching is a nice touch and we are lucky to have flx-ido for that purpose.
 (use-package ido-vertical-mode
   :hook ((after-init . ido-mode)
@@ -153,7 +149,6 @@ Even Better Defaults from [[https://github.com/ianpan870102/.emacs.d][Ian's Yay-
 [[https://github.com/adamrt/sane-term][sane-term]] provides ansi-term with some sane defaults making for a smoother experience.
 #+BEGIN_SRC emacs-lisp
 (use-package sane-term
-  :ensure t
   :bind (
     ("C-x t" . sane-term)
     ("C-x T" . sane-term-create)))
@@ -164,7 +159,6 @@ That's why we use popup-kill-ring instead!
 
 #+BEGIN_SRC emacs-lisp
 (use-package popup-kill-ring
-:ensure t
 :bind ("M-y" . popup-kill-ring))
 #+END_SRC
 
@@ -172,7 +166,6 @@ That's why we use popup-kill-ring instead!
 which-key mode, great for finding and using new commands/
 #+begin_src emacs-lisp
   (use-package which-key
-  :ensure t
   :diminish
   :config
   (which-key-mode t)
@@ -240,7 +233,6 @@ Refresh dired in the background as well, quietly.
 Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
 #+begin_src emacs-lisp
   (use-package swap-buffers
-   :ensure t
    :bind
     ("M-s M-s" . swap-buffers))
 #+end_src
@@ -349,7 +341,6 @@ Redefining stuck-projects as TODO items that aren't scheduled.
 [[https://github.com/bbatsov/projectile][Projectile]] is a package that provides Emacs with a way to easier interact with the files a project.
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
-:ensure t
 :bind-keymap
 ("C-c p" . projectile-command-map)
 ("s-p" . projectile-command-map)
@@ -359,14 +350,12 @@ Redefining stuck-projects as TODO items that aren't scheduled.
 
 Searching via ag
 #+BEGIN_SRC emacs-lisp
-(use-package ag
-:ensure t)
+(use-package ag)
 #+END_SRC
 
 Using Helm
 #+BEGIN_SRC emacs-lisp
 (use-package helm-ag
-:ensure t
 :after ag helm)
 #+END_SRC
 * Helm
@@ -374,7 +363,6 @@ helm-M-x is a beautiful thing that always helps me find what command
 I need.
 #+begin_src emacs-lisp
   (use-package helm
-  :ensure t
   :bind
    (("M-x" . helm-M-x)))
 #+end_src
@@ -383,7 +371,6 @@ Looking for things using Ido is a more efficient way of looking
 while still keeping that "Emacs-way" of life.
 #+begin_src emacs-lisp
   (use-package ido
-  :ensure t
   :config
   (ido-mode))
 #+end_src
@@ -393,8 +380,6 @@ Magit is a great interface for git. Much smoother than using
 commandline git.
 #+begin_src emacs-lisp
   (use-package magit
-  :ensure t
-  :defer t
   :bind ("C-c g" . magit-status)
   :config
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
@@ -405,7 +390,6 @@ A package from the creator of magit which allows the user to interact
 with Git forges such as GitHub and GitLab while using Emacs and Magit.
 #+BEGIN_SRC emacs-lisp
 (use-package forge
-:ensure t
 :after magit)
 #+END_SRC
 * Programming
@@ -418,7 +402,6 @@ Line numbering.
 Rainbow delimiters in all languages!
 #+begin_src emacs-lisp
    (use-package rainbow-delimiters
-   :ensure t
    :config
    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 #+end_src
@@ -449,7 +432,6 @@ Comment/uncomment regions of code.
 Multimarkers!
 #+begin_src emacs-lisp
    (use-package multiple-cursors
-   :ensure t
    :bind
    (("C-s-c C-s-c" . mc/edit-lines)
    ("C-s->" . mc/mark-next-like-this)
@@ -460,7 +442,6 @@ Multimarkers!
 Line movement
    #+begin_src emacs-lisp
    (use-package move-dup
-   :ensure t
    :bind
    (("M-<up>" . 'md-move-lines-up)
    (("M-<down>" . 'md-move-lines-down))
@@ -471,7 +452,6 @@ Line movement
 Show flycheck errors inline.
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck-inline
-:ensure t
 :after flycheck
 :hook (flycheck-mode . flycheck-inline-mode))
 
@@ -499,14 +479,12 @@ Or you could the the whole install with a oneliner
 Enables Elpy, a nice Python environment.
 #+begin_src emacs-lisp
    (use-package elpy
-   :ensure t
-   :config
+      :config
     (add-hook 'python-mode-hook 'elpy-enable))
 #+end_src
 ** SQL
 #+begin_src emacs-lisp
 (use-package sqlformat
-:ensure t
 :defer t
 :config
 (setq sqlformat-command "pg_format")
@@ -519,7 +497,6 @@ Enables Elpy, a nice Python environment.
 Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.io/emacs/2017/08/21/web-development-in-emacs][fransiska]].
 #+begin_src emacs-lisp
   (use-package web-mode
-  :ensure t
   :mode (
   ("\\.html?\\'" . web-mode)
   ("\\.tsx\\'" . web-mode)
@@ -551,7 +528,6 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
 
 #+BEGIN_SRC emacs-lisp
 (use-package company-web
-:ensure t
 :defer t
 :init
 (with-eval-after-load 'company
@@ -596,8 +572,7 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
 #+END_SRC
 Indium
 #+begin_src emacs-lisp
-(use-package indium
-:ensure t)
+(use-package indium)
 #+end_src
 
 *** TypeScript
@@ -605,13 +580,11 @@ TIDE - TypeScript Interactive Development Environment
 Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 #+begin_src emacs-lisp
 (use-package tide
-  :ensure t
-  :after (typescript-mode company flycheck))
+    :after (typescript-mode company flycheck))
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
 (use-package typescript-mode
-  :ensure t
   :mode "\\.ts\\'"
   :hook
   (typescript-mode . prettier-js-mode)
@@ -626,7 +599,6 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 
 #+begin_src emacs-lisp
 (use-package add-node-modules-path
-:ensure t
 :config
 (eval-after-load 'web-mode
   '(add-hook 'web-mode-hook #'add-node-modules-path)))
@@ -634,7 +606,6 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 
 #+begin_src emacs-lisp
 (use-package prettier-js
-:ensure t
 :diminish 'prettier-js-mode
 :hook
 (web-mode . prettier-js-mode)
@@ -646,7 +617,6 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 Markdown mode
 #+begin_src emacs-lisp
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -676,7 +646,6 @@ Auctex for Latex
 Keybindings so that I can control Spotify without switching focus from Emacs.
 #+begin_src emacs-lisp
 (use-package spotify
-:ensure t
 :bind (
 ("M-s M-n" . spotify-next)
 ("M-s M-p" . spotify-previous)
@@ -731,7 +700,6 @@ A package with an implementation of Powerline for Emacs.
 
 #+BEGIN_SRC emacs-lisp
 (use-package telephone-line
-:ensure t
 :config
 (face-spec-set 'telephone-line-accent-active  '((t :background "#50507a"))
 'face-defface-spec)
@@ -743,7 +711,6 @@ A package with an implementation of Powerline for Emacs.
 [[https://github.com/winterTTr/ace-jump-mode][Ace-jump-mode]] to be able to quickly jump around in buffers by specifying letters.
 #+BEGIN_SRC emacs-lisp
 (use-package ace-jump-mode
-:ensure t
 :bind
 ("C-." . ace-jump-mode)
 :config
@@ -752,8 +719,6 @@ A package with an implementation of Powerline for Emacs.
 * PDF
 #+BEGIN_SRC emacs-lisp
 (use-package pdf-tools
-:ensure t
 :config
 (pdf-loader-install))
-
 #+END_SRC
