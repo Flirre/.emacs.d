@@ -209,6 +209,19 @@ Indent those headers for me please.
   (add-hook 'org-mode-hook 'org-indent-mode)
 #+end_src
 
+Pretty symbols shown in buffer
+#+BEGIN_SRC emacs-lisp
+(setq org-pretty-entities t)
+#+END_SRC
+
+minted for org-mode pdfs
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-listings 'minted
+  org-latex-packages-alist '(("" "minted"))
+  org-latex-pdf-process
+  '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+#+END_SRC
+
 Agenda mode for organization.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
