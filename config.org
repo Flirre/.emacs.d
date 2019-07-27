@@ -575,7 +575,9 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 :ensure t
 :diminish 'prettier-js-mode
 :hook
-(web-mode . prettier-js-mode))
+(web-mode . prettier-js-mode)
+:config
+(setq prettier-js-args '("--single-quote")))
 #+end_src
 
 * Markdown
