@@ -229,7 +229,7 @@ Agenda mode for organization.
 
 Add all agenda files to agenda.
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/agenda/"))
+(setq org-agenda-files '("~/agenda"))
 #+END_SRC
 
 Set correct path for archiving.
