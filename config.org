@@ -83,17 +83,6 @@ And to tell Emacs to use that font you run:
   ;; Quiet in Emacs, please
   (setq visible-bell t)
 
-  ;; Company-mode everywhere
-  (use-package company
-  :ensure t
-  :config
-  (global-company-mode)
-  (setq company-global-modes '(not magit-status-mode))
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
-  (diminish 'company-mode))
-
   ;; Please no bars.
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -101,10 +90,65 @@ And to tell Emacs to use that font you run:
 
   ;; Where am I on the line?
   (column-number-mode 1)
-
-  ;; Show matching parentheses
-  (show-paren-mode)
 #+end_src
+
+Even Better Defaults from [[https://github.com/ianpan870102/.emacs.d][Ian's Yay-Evil Distro]].
+#+BEGIN_SRC emacs-lisp
+;; better scrolling experience
+(setq scroll-margin 0
+      scroll-conservatively 10000
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil)
+
+;; increase line space for better readability
+(setq-default line-spacing 2)
+
+(use-package paren
+  :ensure nil
+  :config
+  (setq show-paren-delay 0)
+  (show-paren-mode))
+
+(use-package elec-pair
+  :ensure nil
+  :config (add-hook 'prog-mode-hook 'electric-pair-mode))
+
+(use-package mwheel
+  :ensure nil
+  :config (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+                mouse-wheel-progressive-speed nil))
+
+(use-package company
+  :diminish company-mode
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-minimum-prefix-length 1
+        company-idle-delay 0
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t
+        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                            company-echo-metadata-frontend))
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)))
+
+;; A modern on-the-fly syntax checking extension – absolutely essential
+(use-package flycheck
+  :hook (after-init . global-flycheck-mode))
+
+;; Selecting buffers/files with great efficiency. In my opinion, Ido is enough to replace Ivy and Helm. We install ido-vertical to get a better view of the available options (use C-n, C-p or arrow keys to navigate). 
+;; Flex matching is a nice touch and we are lucky to have flx-ido for that purpose.
+(use-package ido-vertical-mode
+  :hook ((after-init . ido-mode)
+         (after-init . ido-vertical-mode))
+  :config
+  (setq ido-everywhere t
+        ido-enable-flex-matching t
+        ido-vertical-define-keys 'C-n-C-p-up-and-down))
+
+(use-package flx-ido
+:config (flx-ido-mode))
+#+END_SRC
 
 [[https://github.com/adamrt/sane-term][sane-term]] provides ansi-term with some sane defaults making for a smoother experience.
 #+BEGIN_SRC emacs-lisp
@@ -160,7 +204,9 @@ Rebind key to helm-imenu
 
 Keybinding for running company (conflict with Magit-status-mode)
 #+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'company
 (define-key company-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+)
 #+END_SRC
 
 Keyboard shortcut for reverting buffer without confirming.
@@ -199,14 +245,16 @@ Swap-buffers is a package that makes it easier to swap around buffers to get the
     ("M-s M-s" . swap-buffers))
 #+end_src
 * Org-mode
-Visual lines in org mode for better readability.
+Visual lines in org mode for better readability and indent those headers for me, please.
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'visual-line-mode)
-#+end_src
-
-Indent those headers for me please.
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'org-indent-mode)
+(use-package org
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . org-indent-mode))
+:config
+(with-eval-after-load 'org
+  (use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
+))
 #+end_src
 
 Pretty symbols shown in buffer
@@ -374,6 +422,19 @@ Rainbow delimiters in all languages!
    :config
    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 #+end_src
+
+Lightweight syntax highlighting improvement for numbers, operators, and escape sequences
+From [[https://github.com/ianpan870102/.emacs.d/blob/master/config.org][Yay-Evil]].
+#+BEGIN_SRC emacs-lisp
+(use-package highlight-numbers
+:hook (prog-mode . highlight-numbers-mode))
+
+(use-package highlight-operators
+:hook (prog-mode . highlight-operators-mode))
+
+(use-package highlight-escape-sequences
+:hook (prog-mode . hes-mode))
+#+END_SRC
 
 Remove trailing whitespace when saving files.
 #+begin_src emacs-lisp
