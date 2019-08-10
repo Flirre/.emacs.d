@@ -213,6 +213,14 @@ Keyboard shortcut for reverting buffer without confirming.
 (global-set-key (kbd "C-S-R") 'revert-buffer-no-confirm)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-o") 'other-window)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-S-o") 'open-line )
+#+END_SRC
+
 * Buffers
 Use ibuffer instead of list-buffers
 #+begin_src emacs-lisp
@@ -260,6 +268,11 @@ minted for org-mode pdfs
   org-latex-packages-alist '(("" "minted"))
   org-latex-pdf-process
   '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+#+END_SRC
+
+keybinding for storing links to files/lines
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c l") 'org-store-link)
 #+END_SRC
 
 Agenda mode for organization.
