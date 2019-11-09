@@ -706,18 +706,7 @@ I borrowed this from somewhere. It makes sudo access much smoother.
 
 (global-set-key [(control x) (control r)] 'find-file-root)
   #+end_src
-* Telephone Line
-A package with an implementation of Powerline for Emacs.
-
-#+BEGIN_SRC emacs-lisp
-(use-package telephone-line
-:config
-(face-spec-set 'telephone-line-accent-active  '((t :background "#50507a"))
-'face-defface-spec)
-(face-spec-set 'telephone-line-accent-inactive  '((t :background "#30305a"))
-'face-defface-spec)
-(telephone-line-mode 1))
-#+END_SRC
+* TODO Modeline
 * Navigation
 [[https://github.com/winterTTr/ace-jump-mode][Ace-jump-mode]] to be able to quickly jump around in buffers by specifying letters.
 #+BEGIN_SRC emacs-lisp
