@@ -44,11 +44,9 @@ Customizing what is shown on the dashboard.
                         (recents  . 5)))
 #+END_SRC
 * Themes
-** base16
+** Darcula
 #+BEGIN_SRC emacs-lisp
-(use-package base16-theme
-:config
-(load-theme 'base16-outrun-dark t))
+(use-package darcula-theme)
 #+END_SRC
 * Font
 [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant monospaced font.
