@@ -57,7 +57,7 @@ You can install it on Arch Linux using an AUR-helper such as yay, which would lo
 And to tell Emacs to use that font you run:
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist
-'(font . "Inconsolata-14:bold"))
+'(font . "Fantasque Sans Mono-18"))
 #+end_src
 * Sane defaults / customizations
 #+begin_src emacs-lisp
