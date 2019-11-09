@@ -735,3 +735,8 @@ A package with an implementation of Powerline for Emacs.
 :config
 (pdf-loader-install))
 #+END_SRC
+* Mac OS
+#+BEGIN_SRC emacs-lisp
+(when (eq system-type 'darwin)
+(setq mac-option-modifier 'super))
+#+END_SRC
