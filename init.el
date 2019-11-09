@@ -26,6 +26,8 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -38,9 +40,6 @@
   (package-install 'use-package))
 (eval-and-compile
   (setq use-package-always-ensure t))
-
-;; workaround bug in Emacs 26.2
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (require 'bind-key)
 
