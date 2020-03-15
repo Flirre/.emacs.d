@@ -26,13 +26,12 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
 
 ;; Disables any loaded themes to avoid loading several custom themes at once.
-(mapcar #'disable-theme custom-enabled-themes)
+(mapc #'disable-theme custom-enabled-themes)
 
 ;; Making sure use-package is installed and installs if it is missing.
 (unless (package-installed-p 'use-package)
@@ -47,3 +46,5 @@
 (setq custom-file "~/.emacs.d/custom-dump.el")
 
 (org-babel-load-file (concat user-emacs-directory "config.org"))
+(provide 'init)
+;;; init.el ends here
