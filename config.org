@@ -245,6 +245,16 @@ Swap-buffers is a package that makes it easier to swap around buffers to get the
    :bind
     ("M-s M-s" . swap-buffers))
 #+end_src
+
+Dimmer.el 'dims' all buffers that aren't in focus so that it's easier to concentrate on the buffer you are editing.
+#+begin_src emacs-lisp
+(use-package dimmer
+:config
+(dimmer-configure-which-key)
+(dimmer-configure-helm)
+(dimmer-configure-magit)
+(dimmer-mode t))
+#+end_src
 * Org-mode
 Visual lines in org mode for better readability and indent those headers for me, please.
 #+begin_src emacs-lisp
