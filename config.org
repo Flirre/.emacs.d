@@ -556,6 +556,17 @@ Enables Elpy, a nice Python environment.
 #+end_src
 
 ** Web Development
+Use local node modules from inside emacs.
+#+begin_src emacs-lisp
+(use-package add-node-modules-path
+:after rjsx-mode typescript-mode web-mode js-mode js2-mode
+:hook
+(rjsx-mode . #'add-node-modules-path)
+(typescript-mode . #'add-node-modules-path)
+(js-mode . #'add-node-modules-path)
+(js2-mode . #'add-node-modules-path)
+(web-mode . #'add-node-modules-path))
+#+end_src
 *** Web-mode
 Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.io/emacs/2017/08/21/web-development-in-emacs][fransiska]].
 #+begin_src emacs-lisp
@@ -584,9 +595,28 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
     (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (tide-setup)
     (tide-hl-identifier-mode)
-    (eldoc-mode)
   (flycheck-mode))))
+  (add-hook 'web-mode-hook
+    (defun setup/tsx ()
+    (setq flycheck-checker 'tsx-tide)
+    (when (string-equal "jsx" (file-name-extension buffer-file-name))
+    (tide-setup)
+    (tide-hl-identifier-mode)
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-mode))))
+  (add-hook 'web-mode-hook 'eslintd-fix-mode)
   )
+(defun my/configure-web-mode-flycheck-checkers ()
+  ;; in order to have flycheck enabled in web-mode, add an entry to this
+  ;; cond that matches the web-mode engine/content-type/etc and returns the
+  ;; appropriate checker.
+  (-when-let (checker (cond
+                       ((string= web-mode-content-type "jsx")
+                        'javascript-eslint)))
+    (flycheck-mode)
+    (flycheck-select-checker checker)))
+
+(add-hook 'web-mode-hook #'my/configure-web-mode-flycheck-checkers)
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
@@ -619,6 +649,7 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
   :mode ("\\.js\\'")
   :hook
   (rjsx-mode . prettier-js-mode)
+  (rjsx-mode . eslintd-fix-mode)
   :config
   (add-hook
   'rjsx-mode-hook
@@ -629,13 +660,21 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
   (tide-hl-identifier-mode)
-  (eldoc-mode)
   (flycheck-mode))))
 
 #+END_SRC
 Indium
 #+begin_src emacs-lisp
 (use-package indium)
+#+end_src
+
+eslint running in daemon-mode, making it run a bit faster compared to running ordinary eslint.
+#+begin_src emacs-lisp
+(use-package eslintd-fix
+:after rjsx-mode
+:config
+(setq flycheck-javascript-eslint-executable "eslint_d"))
+
 #+end_src
 
 *** TypeScript
@@ -673,7 +712,8 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 :hook
 (web-mode . prettier-js-mode)
 :config
-(setq prettier-js-args '("--single-quote")))
+(setq prettier-js-args '("--single-quote"))
+(setq prettier-js-command "prettier_d"))
 #+end_src
 
 * Markdown
