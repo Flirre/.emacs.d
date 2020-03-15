@@ -71,9 +71,20 @@ For example projects via Projectile, agenda-view via Org-Agenda, etc.
 (setq dashboard-set-file-icons t))
 #+END_SRC
 * Themes
-** Darcula
+** Doom-themes
 #+BEGIN_SRC emacs-lisp
-(use-package darcula-theme)
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-molokai-fixed t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 #+END_SRC
 * Font
 [[https://fonts.google.com/specimen/Inconsolata][Inconsolata]] is a pleasant monospaced font.
@@ -737,7 +748,36 @@ I borrowed this from somewhere. It makes sudo access much smoother.
 
 (global-set-key [(control x) (control r)] 'find-file-root)
   #+end_src
-* TODO Modeline
+* Modeline
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+:ensure t
+:hook (after-init . doom-modeline-mode)
+:config
+(setq doom-modeline-height 25)
+(setq doom-modeline-bar-width 3)
+(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+(setq doom-modeline-icon (display-graphic-p))
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-major-mode-color-icon t)
+(setq doom-modeline-buffer-state-icon t)
+(setq doom-modeline-buffer-modification-icon t)
+(setq doom-modeline-buffer-encoding nil)
+(setq doom-modeline-checker-simple-format t)
+(setq doom-modeline-env-version t)
+(setq doom-modeline-env-load-string "...")
+(setq doom-modeline-vcs-max-length 30)
+
+(doom-modeline-def-modeline 'flirres-line
+  '(bar matches buffer-info remote-host selection-info)
+  '(misc-info major-mode process vcs checker))
+
+(defun setup-custom-doom-modeline ()
+  (doom-modeline-set-modeline 'flirres-line 'default))
+
+(add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline))
+#+END_SRC
+
 * Navigation
 [[https://github.com/winterTTr/ace-jump-mode][Ace-jump-mode]] to be able to quickly jump around in buffers by specifying letters.
 #+BEGIN_SRC emacs-lisp
