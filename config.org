@@ -196,10 +196,10 @@ things.
 
 Keybind for window resize
 #+begin_src emacs-lisp
- (global-set-key (kbd "C-s-<left>") 'shrink-window-horizontally)
- (global-set-key (kbd "C-s-<right>") 'enlarge-window-horizontally)
- (global-set-key (kbd "C-s-<up>") 'enlarge-window)
- (global-set-key (kbd "C-s-<down>") 'shrink-window)
+ (global-set-key (kbd "M-s-<left>") 'shrink-window-horizontally)
+ (global-set-key (kbd "M-s-<right>") 'enlarge-window-horizontally)
+ (global-set-key (kbd "M-s-<up>") 'enlarge-window)
+ (global-set-key (kbd "M-s-<down>") 'shrink-window)
 #+end_src
 
 Rebind key to helm-imenu
@@ -226,7 +226,7 @@ Keyboard shortcut for reverting buffer without confirming.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "M-o") 'other-window)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
