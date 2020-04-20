@@ -881,6 +881,10 @@ I borrowed this from somewhere. It makes sudo access much smoother.
 
 (use-package all-the-icons-ivy
   :hook (after-init . all-the-icons-ivy-setup))
+
+(use-package all-the-icons-ibuffer
+  :ensure t
+  :init (all-the-icons-ibuffer-mode 1))
 #+END_SRC
 * Dired
 Show less information in dired by default.
