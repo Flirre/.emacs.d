@@ -143,19 +143,6 @@ And to tell Emacs to use that font you run:
   ;; A modern on-the-fly syntax checking extension – absolutely essential
   (use-package flycheck
     :hook (after-init . global-flycheck-mode))
-
-  ;; Selecting buffers/files with great efficiency. In my opinion, Ido is enough to replace Ivy and Helm. We install ido-vertical to get a better view of the available options (use C-n, C-p or arrow keys to navigate).
-  ;; Flex matching is a nice touch and we are lucky to have flx-ido for that purpose.
-  (use-package ido-vertical-mode
-    :hook ((after-init . ido-mode)
-           (after-init . ido-vertical-mode))
-    :config
-    (setq ido-everywhere t
-          ido-enable-flex-matching t
-          ido-vertical-define-keys 'C-n-C-p-up-and-down))
-
-  (use-package flx-ido
-  :config (flx-ido-mode))
 #+END_SRC
 
 [[https://github.com/adamrt/sane-term][sane-term]] provides ansi-term with some sane defaults making for a smoother experience.
@@ -237,6 +224,10 @@ Keyboard shortcut for reverting buffer without confirming.
 Use ibuffer instead of list-buffers
 #+begin_src emacs-lisp
   (defalias 'list-buffers 'ibuffer)
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x b") 'helm-buffers-list)
 #+end_src
 
 Swap-buffers is a package that makes it easier to swap around buffers to get the placements you want.
@@ -427,7 +418,19 @@ I need.
 #+begin_src emacs-lisp
   (use-package helm
   :bind
-   (("M-x" . helm-M-x)))
+   (("M-x" . helm-M-x)
+   ("C-x C-f" . helm-find-files))
+   :config
+   (helm-mode t)
+
+   (setq helm-always-two-windows nil)
+   (setq helm-display-buffer-default-height 23)
+   (setq helm-default-display-buffer-functions '(display-buffer-in-side-window)))
+
+   (use-package helm-projectile
+   :after helm projectile
+   :config
+   (helm-projectile-on))
 #+end_src
 * Ido
 Looking for things using Ido is a more efficient way of looking
@@ -517,8 +520,21 @@ Show flycheck errors inline.
 (use-package flycheck-inline
 :after flycheck
 :hook (flycheck-mode . flycheck-inline-mode))
-
 #+END_SRC
+
+Sort words (useful when sorting incoming destructured objects in jsx)
+#+begin_src emacs-lisp
+    (defun sort-words (reverse beg end)
+      "Sort words in region alphabetically, in REVERSE if negative.
+    Prefixed with negative \\[universal-argument], sorts in reverse.
+
+    The variable `sort-fold-case' determines whether alphabetic case
+    affects the sort order.
+
+    See `sort-regexp-fields'."
+      (interactive "*P\nr")
+      (sort-regexp-fields reverse "\\w+" "\\&" beg end))
+#+end_src
 ** Python
 Some Python packages needed for a working Elpy env. should be
 installed before elpy is installed and configured.
