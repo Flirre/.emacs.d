@@ -417,14 +417,18 @@ helm-M-x is a beautiful thing that always helps me find what command
 I need.
 #+begin_src emacs-lisp
   (use-package helm
+  :demand t
   :bind
    (("M-x" . helm-M-x)
-   ("C-x C-f" . helm-find-files))
+   ("C-x C-f" . helm-find-files)
+   ("C-s" . helm-occur))
    :config
-   (helm-mode t)
+   (require 'helm-config)
+   (helm-mode 1)
 
    (setq helm-always-two-windows nil)
    (setq helm-display-buffer-default-height 23)
+   (setq helm-buffer-max-length nil)
    (setq helm-default-display-buffer-functions '(display-buffer-in-side-window)))
 
    (use-package helm-projectile
@@ -432,6 +436,7 @@ I need.
    :config
    (helm-projectile-on))
 #+end_src
+
 * Ido
 Looking for things using Ido is a more efficient way of looking
 while still keeping that "Emacs-way" of life.
