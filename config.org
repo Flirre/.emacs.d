@@ -728,8 +728,7 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 :hook
 (web-mode . prettier-js-mode)
 :config
-(setq prettier-js-args '("--single-quote"))
-(setq prettier-js-command "prettier_d"))
+(setq prettier-js-args '("--single-quote")))
 #+end_src
 
 * Markdown
