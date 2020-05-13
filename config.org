@@ -689,15 +689,6 @@ Indium
 (use-package indium)
 #+end_src
 
-eslint running in daemon-mode, making it run a bit faster compared to running ordinary eslint.
-#+begin_src emacs-lisp
-(use-package eslintd-fix
-:after rjsx-mode
-:config
-(setq flycheck-javascript-eslint-executable "eslint_d"))
-
-#+end_src
-
 *** TypeScript
 TIDE - TypeScript Interactive Development Environment
 Tide setup heavily inspired by [[https://github.com/anler][Anler]].
