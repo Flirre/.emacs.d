@@ -95,7 +95,7 @@ You can install it on Arch Linux using an AUR-helper such as yay, which would lo
 And to tell Emacs to use that font you run:
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist
-'(font . "Fantasque Sans Mono-18"))
+'(font . "Fantasque Sans Mono-14"))
 #+end_src
 * Sane defaults / customizations
 #+begin_src emacs-lisp
@@ -540,6 +540,84 @@ Sort words (useful when sorting incoming destructured objects in jsx)
       (interactive "*P\nr")
       (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 #+end_src
+** LSP
+#+begin_src emacs-lisp
+;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+
+;;;;; LSP ;;;;;
+(use-package lsp-mode
+  :init
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-keymap-prefix "C-l")
+  :hook ((scala-mode . lsp-deferred)
+         (java-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
+         (xml-mode . lsp-deferred)
+         (yaml-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         (php-mode . lsp-deferred)
+         (json-mode . lsp-deferred)
+         (dockerfile-mode . lsp-deferred)
+         (sh-mode . lsp-deferred)
+         (html-mode . lsp-deferred)
+         (css-mode . lsp-deferred)
+         (lsp-mode . lsp-lens-mode))
+  ;; waits too long when typing
+  ;;:config (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-ui
+  ;; this plays bad with customized at the bottom of init.el
+  :custom
+    (lsp-ui-doc-enable t)
+    (lsp-ui-doc-use-childframe t)
+    (lsp-ui-doc-position 'top)
+    (lsp-ui-doc-include-signature t)
+    (lsp-ui-flycheck-enable t)
+    (lsp-ui-flycheck-list-position 'bottom)
+    (lsp-ui-flycheck-live-reporting t)
+    (lsp-ui-sideline-enable t)
+    (lsp-ui-sideline-ignore-duplicate t)
+    (lsp-ui-sideline-show-symbol t)
+    (lsp-ui-sideline-show-hover t)
+    (lsp-ui-sideline-show-diagnostics t)
+    (lsp-ui-sideline-show-code-actions t)
+    (lsp-ui-sideline-code-actions-prefix "💡")
+    (lsp-ui-peek-enable t)
+    (lsp-ui-peek-list-width 60)
+    (lsp-ui-peek-peek-height 25)
+    (lsp-ui-imenu-enable t)
+    (lsp-ui-imenu-kind-position 'top)
+  :bind (:map lsp-mode-map ("C-l m" . lsp-ui-imenu))
+  :config
+    (lsp-diagnostics-modeline-mode)
+  :hook (lsp-mode . lsp-ui-mode)
+  :commands (lsp-ui-mode)
+  :after lsp-mode);; if you are helm user
+
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+
+;; optionally if you want to use debugger
+(use-package dap-mode :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode))
+
+(use-package posframe)
+(require 'dap-firefox)
+(require 'dap-chrome)
+
+
+;; Lsp completion
+(use-package company-lsp
+  :after lsp-mode company
+  :custom
+  (company-lsp-cache-candidates t) ;; auto, t(always using a cache), or nil
+  (company-lsp-async t)
+  (company-lsp-enable-snippet t)
+  (company-lsp-enable-recompletion t)
+  :commands company-lsp)
+
+#+end_src
 ** Python
 Some Python packages needed for a working Elpy env. should be
 installed before elpy is installed and configured.
@@ -593,9 +671,7 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
 #+begin_src emacs-lisp
   (use-package web-mode
   :mode (
-  ("\\.html?\\'" . web-mode)
-  ("\\.tsx\\'" . web-mode)
-  ("\\.jsx\\'" . web-mode))
+  ("\\.html?\\'" . web-mode))
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (setq web-mode-enable-auto-closing t)
@@ -608,36 +684,7 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
   (defun my-web-mode-hook ()
     (when (string-equal "html" (file-name-extension buffer-file-name))
     (set (make-local-variable 'company-backends) '(company-css company-web-html company-yasnippet company-files )))
-  )
-  (add-hook 'web-mode-hook 'my-web-mode-hook)
-  (add-hook 'web-mode-hook
-    (defun setup/tsx ()
-    (setq flycheck-checker 'tsx-tide)
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (tide-setup)
-    (tide-hl-identifier-mode)
-  (flycheck-mode))))
-  (add-hook 'web-mode-hook
-    (defun setup/tsx ()
-    (setq flycheck-checker 'tsx-tide)
-    (when (string-equal "jsx" (file-name-extension buffer-file-name))
-    (tide-setup)
-    (tide-hl-identifier-mode)
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (flycheck-mode))))
-  (add-hook 'web-mode-hook 'eslintd-fix-mode)
-  )
-(defun my/configure-web-mode-flycheck-checkers ()
-  ;; in order to have flycheck enabled in web-mode, add an entry to this
-  ;; cond that matches the web-mode engine/content-type/etc and returns the
-  ;; appropriate checker.
-  (-when-let (checker (cond
-                       ((string= web-mode-content-type "jsx")
-                        'javascript-eslint)))
-    (flycheck-mode)
-    (flycheck-select-checker checker)))
-
-(add-hook 'web-mode-hook #'my/configure-web-mode-flycheck-checkers)
+  ))
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
@@ -663,54 +710,12 @@ Web-mode configuration inspired by/semi-stolen from [[https://fransiska.github.i
 #+END_SRC
 
 *** JavaScript
-
-#+BEGIN_SRC emacs-lisp
-(use-package rjsx-mode
-  :ensure t
-  :mode ("\\.js\\'")
-  :hook
-  (rjsx-mode . prettier-js-mode)
-  (rjsx-mode . eslintd-fix-mode)
-  :config
-  (add-hook
-  'rjsx-mode-hook
-  (defun setup/javascript ()
-  (interactive)
-;; configure jsx-tide checker to run after your default jsx checker
-  (tide-setup)
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
-  (tide-hl-identifier-mode)
-  (flycheck-mode))))
-
-#+END_SRC
 Indium
 #+begin_src emacs-lisp
 (use-package indium)
 #+end_src
 
 *** TypeScript
-TIDE - TypeScript Interactive Development Environment
-Tide setup heavily inspired by [[https://github.com/anler][Anler]].
-#+begin_src emacs-lisp
-(use-package tide
-    :after (typescript-mode company flycheck))
-#+end_src
-
-#+BEGIN_SRC emacs-lisp
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook
-  (typescript-mode . prettier-js-mode)
-  :config
-  (add-hook
-  'typescript-mode-hook
-  (defun setup/typescript ()
-  (interactive)
-  (tide-setup)
-  (tide-hl-identifier-mode))))
-#+END_SRC
-
 #+begin_src emacs-lisp
 (use-package add-node-modules-path
 :config
@@ -722,9 +727,7 @@ Tide setup heavily inspired by [[https://github.com/anler][Anler]].
 (use-package prettier-js
 :diminish 'prettier-js-mode
 :hook
-(web-mode . prettier-js-mode)
-:config
-(setq prettier-js-args '("--single-quote")))
+(web-mode . prettier-js-mode))
 #+end_src
 
 * Markdown
