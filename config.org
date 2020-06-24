@@ -549,21 +549,17 @@ Sort words (useful when sorting incoming destructured objects in jsx)
   :init
   (setq lsp-prefer-flymake nil)
   (setq lsp-keymap-prefix "C-l")
-  :hook ((scala-mode . lsp-deferred)
-         (java-mode . lsp-deferred)
-         (js-mode . lsp-deferred)
-         (xml-mode . lsp-deferred)
+  :hook ((js-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
          (yaml-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
-         (php-mode . lsp-deferred)
          (json-mode . lsp-deferred)
-         (dockerfile-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
          (html-mode . lsp-deferred)
          (css-mode . lsp-deferred)
+         (sh-mode . lsp-deferred)
          (lsp-mode . lsp-lens-mode))
   ;; waits too long when typing
-  ;;:config (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  :config (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
@@ -571,18 +567,17 @@ Sort words (useful when sorting incoming destructured objects in jsx)
   :custom
     (lsp-ui-doc-enable t)
     (lsp-ui-doc-use-childframe t)
-    (lsp-ui-doc-position 'top)
+    (lsp-ui-doc-position 'at-point)
     (lsp-ui-doc-include-signature t)
+    (lsp-modeline-code-actions-enable nil)
     (lsp-ui-flycheck-enable t)
     (lsp-ui-flycheck-list-position 'bottom)
     (lsp-ui-flycheck-live-reporting t)
     (lsp-ui-sideline-enable t)
     (lsp-ui-sideline-ignore-duplicate t)
-    (lsp-ui-sideline-show-symbol t)
-    (lsp-ui-sideline-show-hover t)
     (lsp-ui-sideline-show-diagnostics t)
     (lsp-ui-sideline-show-code-actions t)
-    (lsp-ui-sideline-code-actions-prefix "💡")
+    (lsp-ui-sideline-code-actions-prefix "✨ ")
     (lsp-ui-peek-enable t)
     (lsp-ui-peek-list-width 60)
     (lsp-ui-peek-peek-height 25)
@@ -606,17 +601,13 @@ Sort words (useful when sorting incoming destructured objects in jsx)
 (require 'dap-firefox)
 (require 'dap-chrome)
 
-
-;; Lsp completion
-(use-package company-lsp
-  :after lsp-mode company
-  :custom
-  (company-lsp-cache-candidates t) ;; auto, t(always using a cache), or nil
-  (company-lsp-async t)
-  (company-lsp-enable-snippet t)
-  (company-lsp-enable-recompletion t)
-  :commands company-lsp)
-
+#+end_src
+*** Godot
+#+begin_src emacs-lisp
+(use-package gdscript-mode
+:hook (gdscript-mode . lsp)
+:config
+(setq gdscript-godot-executable "/usr/bin/godot-beta"))
 #+end_src
 ** Python
 Some Python packages needed for a working Elpy env. should be
