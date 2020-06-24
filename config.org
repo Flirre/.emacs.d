@@ -94,8 +94,13 @@ You can install it on Arch Linux using an AUR-helper such as yay, which would lo
 #+end_src
 And to tell Emacs to use that font you run:
 #+begin_src emacs-lisp
+(when (eq system-type 'darwin)
 (add-to-list 'default-frame-alist
-'(font . "Fantasque Sans Mono-14"))
+'(font . "FantasqueSansMono Nerd Font-18")))
+
+(when (eq system-type 'gnu/linux)
+(add-to-list 'default-frame-alist
+'(font . "FantasqueSansMono Nerd Font-14")))
 #+end_src
 * Sane defaults / customizations
 #+begin_src emacs-lisp
@@ -420,6 +425,7 @@ I need.
   :demand t
   :bind
    (("M-x" . helm-M-x)
+   ("M-y" . helm-show-kill-ring)
    ("C-x C-f" . helm-find-files)
    ("C-s" . helm-occur))
    :config
@@ -718,7 +724,14 @@ Indium
 (use-package prettier-js
 :diminish 'prettier-js-mode
 :hook
-(web-mode . prettier-js-mode))
+(web-mode . prettier-js-mode)
+(typescript-mode . prettier-js-mode)
+(js-mode . prettier-js-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package typescript-mode
+  :mode ("\\.tsx?\\'"))
 #+end_src
 
 * Markdown
@@ -863,7 +876,7 @@ I borrowed this from somewhere. It makes sudo access much smoother.
 
 (use-package all-the-icons-dired
 :after all-the-icons
-:hook dired)
+:hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package all-the-icons
   :config (setq all-the-icons-scale-factor 1.0))

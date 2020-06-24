@@ -31,8 +31,6 @@
 (package-initialize)
 
 ;; Disables any loaded themes to avoid loading several custom themes at once.
-(mapc #'disable-theme custom-enabled-themes)
-
 ;; Making sure use-package is installed and installs if it is missing.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -41,7 +39,11 @@
   (setq use-package-always-ensure t))
 
 (require 'bind-key)
-
+(when (eq system-type 'darwin)
+(add-to-list 'default-frame-alist
+(set-frame-font "FantasqueSansMono Nerd Font-18" nil t)))
+(when (eq system-type 'gnu/linux)
+(set-frame-font "FantasqueSansMono Nerd Font-14" nil t))
 ;; Dump custom-set-variables to a garbage file and don't load it
 (setq custom-file "~/.emacs.d/custom-dump.el")
 
