@@ -58,6 +58,7 @@ get a quick overview of different things while inside Emacs.
 For example projects via Projectile, agenda-view via Org-Agenda, etc.
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard
+:demand t
   :config
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
@@ -65,9 +66,9 @@ For example projects via Projectile, agenda-view via Org-Agenda, etc.
 ;; Customizing what is shown on the dashboard.
 (setq dashboard-banner-logo-title nil)
 (setq dashboard-center-content t)
-(setq dashboard-items '((agenda . 10)
-                        (projects . 5)
-                        (recents  . 5)))
+(setq dashboard-items '((recents . 15)
+                        (projects . 6)
+                        (agenda  . 6)))
 (setq dashboard-set-file-icons t))
 #+END_SRC
 * Themes
@@ -255,6 +256,7 @@ Dimmer.el 'dims' all buffers that aren't in focus so that it's easier to concent
 Visual lines in org mode for better readability and indent those headers for me, please.
 #+begin_src emacs-lisp
 (use-package org
+ :defer t
   :hook ((org-mode . visual-line-mode)
          (org-mode . org-indent-mode))
 :config
@@ -400,6 +402,7 @@ Activated with 'C-c C-,'
 [[https://github.com/bbatsov/projectile][Projectile]] is a package that provides Emacs with a way to easier interact with the files a project.
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
+:demand t
 :bind-keymap
 ("C-c p" . projectile-command-map)
 ("s-p" . projectile-command-map)
@@ -439,10 +442,10 @@ I need.
 
    (use-package helm-projectile
    :after helm projectile
+   :demand t
    :config
    (helm-projectile-on))
 #+end_src
-
 * Ido
 Looking for things using Ido is a more efficient way of looking
 while still keeping that "Emacs-way" of life.
@@ -462,6 +465,12 @@ commandline git.
    (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
    (setq magit-section-visibility-indicator nil))
 #+end_src
+
+Smerge rebind
+#+begin_src emacs-lisp
+(setq smerge-command-prefix "\C-cs")
+#+end_src
+
 ** Forge
 A package from the creator of magit which allows the user to interact
 with Git forges such as GitHub and GitLab while using Emacs and Magit.
@@ -613,7 +622,7 @@ Sort words (useful when sorting incoming destructured objects in jsx)
 (use-package gdscript-mode
 :hook (gdscript-mode . lsp)
 :config
-(setq gdscript-godot-executable "/usr/bin/godot-beta"))
+(setq gdscript-godot-executable "/usr/bin/godot"))
 #+end_src
 ** Python
 Some Python packages needed for a working Elpy env. should be
@@ -711,7 +720,6 @@ Indium
 #+begin_src emacs-lisp
 (use-package indium)
 #+end_src
-
 *** TypeScript
 #+begin_src emacs-lisp
 (use-package add-node-modules-path
@@ -867,8 +875,10 @@ I borrowed this from somewhere. It makes sudo access much smoother.
 (setq mac-option-modifier 'super))
 
 (use-package exec-path-from-shell
-  :config (when (memq window-system '(mac ns x))
-            (exec-path-from-shell-initialize)))
+  :ensure t
+  :defer 0.1
+  :config
+  (exec-path-from-shell-initialize))
 #+END_SRC
 * All The Icons
 #+BEGIN_SRC emacs-lisp
@@ -915,6 +925,9 @@ Replace the active region just by typing text, just like modern editors
 #+begin_src emacs-lisp
 (use-package delsel
   :ensure nil
+  :bind
+  (:map mode-specific-map
+        ("C-g" . minibuffer-keyboard-quit))
   :config (delete-selection-mode +1))
 #+end_src
 
@@ -928,6 +941,7 @@ Enable column numbers
 #+begin_src emacs-lisp
 (use-package autorevert
   :ensure nil
+  :defer 0.1
   :config
   (global-auto-revert-mode +1)
   (setq auto-revert-interval 2
